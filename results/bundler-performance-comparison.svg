@@ -1,0 +1,44 @@
+<svg width="900" height="600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="600" fill="white" />
+  <text x="450" y="30" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle">Bundler Performance Comparison</text>
+  <g transform="translate(80, 60)">
+    <line x1="0" y1="480" x2="700" y2="480" stroke="#ddd" stroke-width="1" />
+    <text x="-10" y="480" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">0</text>
+    <line x1="0" y1="432" x2="700" y2="432" stroke="#ddd" stroke-width="1" />
+    <text x="-10" y="432" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">100</text>
+    <line x1="0" y1="384" x2="700" y2="384" stroke="#ddd" stroke-width="1" />
+    <text x="-10" y="384" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">200</text>
+    <line x1="0" y1="336" x2="700" y2="336" stroke="#ddd" stroke-width="1" />
+    <text x="-10" y="336" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">300</text>
+    <line x1="0" y1="288" x2="700" y2="288" stroke="#ddd" stroke-width="1" />
+    <text x="-10" y="288" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">400</text>
+    <line x1="0" y1="240" x2="700" y2="240" stroke="#ddd" stroke-width="1" />
+    <text x="-10" y="240" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">500</text>
+    <line x1="0" y1="192" x2="700" y2="192" stroke="#ddd" stroke-width="1" />
+    <text x="-10" y="192" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">600</text>
+    <line x1="0" y1="144" x2="700" y2="144" stroke="#ddd" stroke-width="1" />
+    <text x="-10" y="144" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">700</text>
+    <line x1="0" y1="96" x2="700" y2="96" stroke="#ddd" stroke-width="1" />
+    <text x="-10" y="96" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">800</text>
+    <line x1="0" y1="48" x2="700" y2="48" stroke="#ddd" stroke-width="1" />
+    <text x="-10" y="48" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">900</text>
+    <line x1="0" y1="0" x2="700" y2="0" stroke="#ddd" stroke-width="1" />
+    <text x="-10" y="0" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">1000</text>
+    <text x="-40" y="240" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" transform="rotate(-90, -40, 240)">Execution Time (ms)</text>
+    <line x1="0" y1="480" x2="700" y2="480" stroke="#000" stroke-width="1" />
+    <text x="350" y="510" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">thousand-functions</text>
+    <rect x="140" y="12.314639999999997" width="112" height="467.68536" fill="#4285F4" />
+    <text x="196" y="246.15732" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#fff" dominant-baseline="middle">974.3445ms</text>
+    <rect x="280" y="430.48743984" width="112" height="49.51256016" fill="#34A853" />
+    <text x="336" y="455.24371992" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#fff" dominant-baseline="middle">103.151167ms</text>
+    <rect x="420" y="455.56760016" width="112" height="24.43239984" fill="#FBBC05" />
+    <text x="476" y="467.78380008" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#fff" dominant-baseline="middle">50.900833ms</text>
+    <text x="710" y="0" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="start">Bundlers:</text>
+    <rect x="710" y="25" width="15" height="15" fill="#4285F4" />
+    <text x="735" y="37" font-family="Arial, sans-serif" font-size="12" text-anchor="start">unbuild</text>
+    <rect x="710" y="50" width="15" height="15" fill="#34A853" />
+    <text x="735" y="62" font-family="Arial, sans-serif" font-size="12" text-anchor="start">tsup</text>
+    <rect x="710" y="75" width="15" height="15" fill="#FBBC05" />
+    <text x="735" y="87" font-family="Arial, sans-serif" font-size="12" text-anchor="start">tsdown</text>
+  </g>
+</svg>
