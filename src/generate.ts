@@ -54,7 +54,7 @@ const generateTypedFunction = (index: number): string => {
   }
   interfaceContent += '}\n\n';
   
-  return `${interfaceContent}export const ${functionName} = (options?: ${interfaceName}) => {
+  return `${interfaceContent}export const ${functionName} = (options?: ${interfaceName}): void => {
   console.log('Hello from function ${index}!', options);
 };
 `;

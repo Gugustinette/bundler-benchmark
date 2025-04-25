@@ -27,19 +27,19 @@
     <text x="-40" y="240" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" transform="rotate(-90, -40, 240)">Execution Time (ms)</text>
     <line x1="0" y1="480" x2="700" y2="480" stroke="#000" stroke-width="1" />
     <text x="175" y="510" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">thousand-functions</text>
-    <rect x="70" y="356.68765008" width="56" height="123.31234992" fill="#4285F4" />
-    <text x="98" y="418.34382504" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#fff" dominant-baseline="middle">1028 ms</text>
-    <rect x="140" y="467.92418496" width="56" height="12.07581504" fill="#34A853" />
-    <text x="168" y="462.92418496" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">101 ms</text>
-    <rect x="210" y="473.53631496" width="56" height="6.46368504" fill="#FBBC05" />
-    <text x="238" y="468.53631496" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">54 ms</text>
+    <rect x="70" y="359.33772" width="56" height="120.66228000000001" fill="#4285F4" />
+    <text x="98" y="419.66886" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#fff" dominant-baseline="middle">1006 ms</text>
+    <rect x="140" y="468.14166" width="56" height="11.85834" fill="#34A853" />
+    <text x="168" y="463.14166" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">99 ms</text>
+    <rect x="210" y="473.13591996" width="56" height="6.86408004" fill="#FBBC05" />
+    <text x="238" y="468.13591996" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">57 ms</text>
     <text x="525" y="510" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">thousand-typed-functions</text>
-    <rect x="420" y="49.556479920000015" width="56" height="430.44352008" fill="#4285F4" />
-    <text x="448" y="264.77823996" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#fff" dominant-baseline="middle">3587 ms</text>
-    <rect x="490" y="50.51387496000001" width="56" height="429.48612504" fill="#34A853" />
-    <text x="518" y="265.25693748000003" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#fff" dominant-baseline="middle">3579 ms</text>
-    <rect x="560" y="296.74947996000003" width="56" height="183.25052004" fill="#FBBC05" />
-    <text x="588" y="388.37473998" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#fff" dominant-baseline="middle">1527 ms</text>
+    <rect x="420" y="56.08026000000007" width="56" height="423.91973999999993" fill="#4285F4" />
+    <text x="448" y="268.04013000000003" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#fff" dominant-baseline="middle">3533 ms</text>
+    <rect x="490" y="51.20883504" width="56" height="428.79116496" fill="#34A853" />
+    <text x="518" y="265.60441751999997" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#fff" dominant-baseline="middle">3573 ms</text>
+    <rect x="560" y="371.63876508" width="56" height="108.36123492000002" fill="#FBBC05" />
+    <text x="588" y="425.81938254" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#fff" dominant-baseline="middle">903 ms</text>
     <text x="710" y="0" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="start">Bundlers:</text>
     <rect x="710" y="25" width="15" height="15" fill="#4285F4" />
     <text x="735" y="37" font-family="Arial, sans-serif" font-size="12" text-anchor="start">unbuild</text>

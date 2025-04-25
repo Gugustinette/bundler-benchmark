@@ -17,6 +17,8 @@ export const build = async (options: BundlerOptions) => {
     sourcemap: true,
     minify: true,
     silent: false,
-    dts: options.dts || false,
+    dts: options.dts ? {
+      isolatedDeclarations: true,
+    } : false,
   });
 };
