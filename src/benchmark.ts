@@ -5,38 +5,50 @@ import { TimeUtil } from './util/TimeUtil';
 import { BarChartMetrics, MetricsUtil } from './util/MetricsUtil';
 
 const projects = [
-  'thousand-functions',
+  {
+    name: 'thousand-functions',
+    bundlerOptions: {}
+  },
+  {
+    name: 'thousand-typed-functions',
+    bundlerOptions: {
+      dts: true,
+    },
+  },
 ];
 
 const benchmark = async () => {
   const bundlerMetrics: BarChartMetrics = {};
 
   for (const project of projects) {
-    bundlerMetrics[project] = {};
+    bundlerMetrics[project.name] = {};
 
     // unbuild
     const unbuildExecutionTime = await TimeUtil.getTimeExecutionFor(() =>
       buildUnbuild({
-        project: 'thousand-functions',
+        project: project.name,
+        ...project.bundlerOptions,
       })
     );
-    bundlerMetrics[project]['unbuild'] = unbuildExecutionTime;
+    bundlerMetrics[project.name]['unbuild'] = unbuildExecutionTime;
 
     // tsup
     const tsupExecutionTime = await TimeUtil.getTimeExecutionFor(() =>
       buildTsup({
-        project: 'thousand-functions',
+        project: project.name,
+        ...project.bundlerOptions,
       })
     );
-    bundlerMetrics[project]['tsup'] = tsupExecutionTime;
+    bundlerMetrics[project.name]['tsup'] = tsupExecutionTime;
 
     // tsdown
     const tsdownExecutionTime = await TimeUtil.getTimeExecutionFor(() =>
       buildTsdown({
-        project: 'thousand-functions',
+        project: project.name,
+        ...project.bundlerOptions,
       })
     );
-    bundlerMetrics[project]['tsdown'] = tsdownExecutionTime;
+    bundlerMetrics[project.name]['tsdown'] = tsdownExecutionTime;
   }
 
   // Log the metrics to the console
@@ -47,7 +59,7 @@ const benchmark = async () => {
     title: "Bundler Performance Comparison",
     width: 900,
     height: 600,
-    formatValue: (value) => `${value}ms`,
+    formatValue: (value) => `${value.toFixed(0)} ms`,
   });
 
   // Save the SVG chart to a file

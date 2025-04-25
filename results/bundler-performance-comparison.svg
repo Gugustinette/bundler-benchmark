@@ -5,34 +5,41 @@
     <line x1="0" y1="480" x2="700" y2="480" stroke="#ddd" stroke-width="1" />
     <text x="-10" y="480" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">0</text>
     <line x1="0" y1="432" x2="700" y2="432" stroke="#ddd" stroke-width="1" />
-    <text x="-10" y="432" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">100</text>
+    <text x="-10" y="432" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">400</text>
     <line x1="0" y1="384" x2="700" y2="384" stroke="#ddd" stroke-width="1" />
-    <text x="-10" y="384" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">200</text>
+    <text x="-10" y="384" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">800</text>
     <line x1="0" y1="336" x2="700" y2="336" stroke="#ddd" stroke-width="1" />
-    <text x="-10" y="336" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">300</text>
+    <text x="-10" y="336" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">1200</text>
     <line x1="0" y1="288" x2="700" y2="288" stroke="#ddd" stroke-width="1" />
-    <text x="-10" y="288" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">400</text>
+    <text x="-10" y="288" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">1600</text>
     <line x1="0" y1="240" x2="700" y2="240" stroke="#ddd" stroke-width="1" />
-    <text x="-10" y="240" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">500</text>
+    <text x="-10" y="240" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">2000</text>
     <line x1="0" y1="192" x2="700" y2="192" stroke="#ddd" stroke-width="1" />
-    <text x="-10" y="192" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">600</text>
+    <text x="-10" y="192" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">2400</text>
     <line x1="0" y1="144" x2="700" y2="144" stroke="#ddd" stroke-width="1" />
-    <text x="-10" y="144" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">700</text>
+    <text x="-10" y="144" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">2800</text>
     <line x1="0" y1="96" x2="700" y2="96" stroke="#ddd" stroke-width="1" />
-    <text x="-10" y="96" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">800</text>
+    <text x="-10" y="96" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">3200</text>
     <line x1="0" y1="48" x2="700" y2="48" stroke="#ddd" stroke-width="1" />
-    <text x="-10" y="48" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">900</text>
+    <text x="-10" y="48" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">3600</text>
     <line x1="0" y1="0" x2="700" y2="0" stroke="#ddd" stroke-width="1" />
-    <text x="-10" y="0" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">1000</text>
+    <text x="-10" y="0" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">4000</text>
     <text x="-40" y="240" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" transform="rotate(-90, -40, 240)">Execution Time (ms)</text>
     <line x1="0" y1="480" x2="700" y2="480" stroke="#000" stroke-width="1" />
-    <text x="350" y="510" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">thousand-functions</text>
-    <rect x="140" y="12.314639999999997" width="112" height="467.68536" fill="#4285F4" />
-    <text x="196" y="246.15732" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#fff" dominant-baseline="middle">974.3445ms</text>
-    <rect x="280" y="430.48743984" width="112" height="49.51256016" fill="#34A853" />
-    <text x="336" y="455.24371992" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#fff" dominant-baseline="middle">103.151167ms</text>
-    <rect x="420" y="455.56760016" width="112" height="24.43239984" fill="#FBBC05" />
-    <text x="476" y="467.78380008" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#fff" dominant-baseline="middle">50.900833ms</text>
+    <text x="175" y="510" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">thousand-functions</text>
+    <rect x="70" y="356.68765008" width="56" height="123.31234992" fill="#4285F4" />
+    <text x="98" y="418.34382504" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#fff" dominant-baseline="middle">1028 ms</text>
+    <rect x="140" y="467.92418496" width="56" height="12.07581504" fill="#34A853" />
+    <text x="168" y="462.92418496" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">101 ms</text>
+    <rect x="210" y="473.53631496" width="56" height="6.46368504" fill="#FBBC05" />
+    <text x="238" y="468.53631496" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">54 ms</text>
+    <text x="525" y="510" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">thousand-typed-functions</text>
+    <rect x="420" y="49.556479920000015" width="56" height="430.44352008" fill="#4285F4" />
+    <text x="448" y="264.77823996" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#fff" dominant-baseline="middle">3587 ms</text>
+    <rect x="490" y="50.51387496000001" width="56" height="429.48612504" fill="#34A853" />
+    <text x="518" y="265.25693748000003" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#fff" dominant-baseline="middle">3579 ms</text>
+    <rect x="560" y="296.74947996000003" width="56" height="183.25052004" fill="#FBBC05" />
+    <text x="588" y="388.37473998" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#fff" dominant-baseline="middle">1527 ms</text>
     <text x="710" y="0" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="start">Bundlers:</text>
     <rect x="710" y="25" width="15" height="15" fill="#4285F4" />
     <text x="735" y="37" font-family="Arial, sans-serif" font-size="12" text-anchor="start">unbuild</text>

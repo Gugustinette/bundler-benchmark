@@ -5,7 +5,7 @@ export const build = async (options: BundlerOptions) => {
   // Setup the project path
   const projectDir = `projects/${options.project}`;
   const entryFile = `${projectDir}/src/index.ts`;
-  const outputDir = `${projectDir}/dist/tsdown`;
+  const outputDir = `${projectDir}/dist/tsup`;
 
   // Build the project
   await buildTsup({
@@ -17,5 +17,6 @@ export const build = async (options: BundlerOptions) => {
     sourcemap: true,
     minify: true,
     silent: true,
+    dts: options.dts || false,
   });
 };

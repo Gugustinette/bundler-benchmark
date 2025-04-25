@@ -1,3 +1,4 @@
 export interface BundlerOptions {
-  project: 'thousand-functions'
+  project: string,
+  dts?: boolean,
 }
