@@ -1,3 +1,7 @@
+export interface BarChartMetrics {
+  [projectName: string]: { [bundlerName: string]: number }
+}
+
 /**
  * Utility class for generating metrics visualizations
  */
@@ -38,7 +42,7 @@ export class MetricsUtil {
    * @returns SVG string representation of the bar chart
    */
   public static generateBarChart(
-    metrics: { [projectName: string]: { [bundlerName: string]: number } },
+    metrics: BarChartMetrics,
     options: Partial<typeof MetricsUtil.DEFAULT_OPTIONS> = {}
   ): string {
     // Validate input

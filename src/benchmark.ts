@@ -2,14 +2,14 @@ import { build as buildUnbuild } from './bundlers/unbuild';
 import { build as buildTsup } from './bundlers/tsup';
 import { build as buildTsdown } from './bundlers/tsdown';
 import { TimeUtil } from './util/TimeUtil';
-import { MetricsUtil } from './util/MetricsUtil';
+import { BarChartMetrics, MetricsUtil } from './util/MetricsUtil';
 
 const projects = [
   'thousand-functions',
 ];
 
 const benchmark = async () => {
-  const bundlerMetrics: { [projectName: string]: { [bundlerName: string]: number } } = {};
+  const bundlerMetrics: BarChartMetrics = {};
 
   for (const project of projects) {
     bundlerMetrics[project] = {};
