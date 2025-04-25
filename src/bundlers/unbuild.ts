@@ -1,16 +1,14 @@
-import { build } from 'unbuild'
+import { build as buildUnbuild } from 'unbuild'
+import { BundlerOptions } from './BundlerOptions';
 
-export const benchmark = async () => {
-  // Build the thousand-functions project
-  const projectDir = 'projects/thousand-functions';
+export const build = async (options: BundlerOptions) => {
+  // Setup the project path
+  const projectDir = `projects/${options.project}`;
   const entryFile = `src/index.ts`;
   const outputDir = `dist/unbuild`;
 
-  // Start time for time measurement
-  const startTime = process.hrtime.bigint();
-
   // Build the project
-  await build(projectDir, false, {
+  await buildUnbuild(projectDir, false, {
     entries: [entryFile],
     outDir: outputDir,
     clean: true,
@@ -24,10 +22,4 @@ export const benchmark = async () => {
       }
     }
   });
-
-  // End time for time measurement
-  const endTime = process.hrtime.bigint();
-  const durationInNs = endTime - startTime;
-  const durationInMs = Number(durationInNs) / 1_000_000; // Convert nanoseconds to milliseconds
-  console.log(`[unbuild]: Built project in ${durationInMs.toFixed(2)} ms`);
 };

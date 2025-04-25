@@ -1,14 +1,31 @@
-import { benchmark as benchmarkUnbuild } from './bundlers/unbuild';
-import { benchmark as benchmarkTsup } from './bundlers/tsup';
-import { benchmark as benchmarkTsdown } from './bundlers/tsdown';
+import { build as buildUnbuild } from './bundlers/unbuild';
+import { build as buildTsup } from './bundlers/tsup';
+import { build as buildTsdown } from './bundlers/tsdown';
+import { TimeUtil } from './util/TimeUtil';
 
 const benchmark = async () => {
   // unbuild
-  await benchmarkUnbuild();
+  const unbuildExecutionTime = await TimeUtil.getTimeExecutionFor(() =>
+    buildUnbuild({
+      project: 'thousand-functions',
+    })
+  );
   // tsup
-  await benchmarkTsup();
+  const tsupExecutionTime = await TimeUtil.getTimeExecutionFor(() =>
+    buildTsup({
+      project: 'thousand-functions',
+    })
+  );
   // tsdown
-  await benchmarkTsdown();
+  const tsdownExecutionTime = await TimeUtil.getTimeExecutionFor(() =>
+    buildTsdown({
+      project: 'thousand-functions',
+    })
+  );
+  // Log the results
+  console.log(`[unbuild]: Built project in ${unbuildExecutionTime.toFixed(2)} ms`);
+  console.log(`[tsup]: Built project in ${tsupExecutionTime.toFixed(2)} ms`);
+  console.log(`[tsdown]: Built project in ${tsdownExecutionTime.toFixed(2)} ms`);
 };
 
 benchmark().catch((err) => {
