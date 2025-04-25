@@ -1,14 +1,14 @@
-import { benchmark as benchmarkTsdown } from './bundlers/tsdown';
-import { benchmark as benchmarkTsup } from './bundlers/tsup';
 import { benchmark as benchmarkUnbuild } from './bundlers/unbuild';
+import { benchmark as benchmarkTsup } from './bundlers/tsup';
+import { benchmark as benchmarkTsdown } from './bundlers/tsdown';
 
 const benchmark = async () => {
-  // tsdown
-  // benchmarkTsdown();
-  // tsup
-  // benchmarkTsup();
   // unbuild
-  benchmarkUnbuild();
+  await benchmarkUnbuild();
+  // tsup
+  await benchmarkTsup();
+  // tsdown
+  await benchmarkTsdown();
 };
 
 benchmark().catch((err) => {
