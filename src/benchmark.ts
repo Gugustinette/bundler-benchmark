@@ -1,30 +1,14 @@
-import { build } from 'tsdown';
+import { benchmark as benchmarkTsdown } from './bundlers/tsdown';
+import { benchmark as benchmarkTsup } from './bundlers/tsup';
+import { benchmark as benchmarkUnbuild } from './bundlers/unbuild';
 
 const benchmark = async () => {
-  // Build the thousand-functions project
-  const projectDir = 'projects/thousand-functions';
-  const entryFile = `${projectDir}/src/index.ts`;
-  const outputDir = `${projectDir}/dist`;
-
-  // Start time for time measurement
-  const startTime = process.hrtime.bigint();
-
-  // Build the project
-  await build({
-    entry: entryFile,
-    outDir: outputDir,
-    format: 'esm',
-    target: 'esnext',
-    clean: true,
-    sourcemap: true,
-    minify: true,
-  });
-
-  // End time for time measurement
-  const endTime = process.hrtime.bigint();
-  const durationInNs = endTime - startTime;
-  const durationInMs = Number(durationInNs) / 1_000_000; // Convert nanoseconds to milliseconds
-  console.log(`Built project in ${durationInMs.toFixed(2)} ms`);
+  // tsdown
+  // benchmarkTsdown();
+  // tsup
+  // benchmarkTsup();
+  // unbuild
+  benchmarkUnbuild();
 };
 
 benchmark().catch((err) => {
