@@ -251,4 +251,21 @@ export class MetricsUtil {
       throw error;
     }
   }
+
+  /**
+   * Log the results of the benchmark
+   * @param metrics Object containing project metrics data
+   */
+  public static logMetrics(metrics: BarChartMetrics): void {
+    console.log("\nBenchmark Results:");
+    for (const project in metrics) {
+      console.log(`  Project: ${project}`);
+      for (const bundler in metrics[project]) {
+        console.log(
+          `    ${bundler}: ${metrics[project][bundler]} ms`
+        );
+      }
+    }
+    console.log("");
+  }
 }

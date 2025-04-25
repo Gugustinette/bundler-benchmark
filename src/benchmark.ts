@@ -39,6 +39,9 @@ const benchmark = async () => {
     bundlerMetrics[project]['tsdown'] = tsdownExecutionTime;
   }
 
+  // Log the metrics to the console
+  MetricsUtil.logMetrics(bundlerMetrics);
+
   // Generate the SVG chart
   const svgChart = MetricsUtil.generateBarChart(bundlerMetrics, {
     title: "Bundler Performance Comparison",
@@ -49,6 +52,7 @@ const benchmark = async () => {
 
   // Save the SVG chart to a file
   MetricsUtil.saveSvgToFile(svgChart, 'results/bundler-performance-comparison.svg');
+  console.log('SVG chart saved to results/bundler-performance-comparison.svg');
 };
 
 benchmark().catch((err) => {
