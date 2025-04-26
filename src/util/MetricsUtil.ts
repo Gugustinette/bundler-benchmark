@@ -256,13 +256,13 @@ export class MetricsUtil {
    * Log the results of the benchmark
    * @param metrics Object containing project metrics data
    */
-  public static logMetrics(metrics: BarChartMetrics): void {
-    console.log("\nBenchmark Results:");
+  public static logMetrics(name: string, unit: string, metrics: BarChartMetrics): void {
+    console.log(`\n${name}:`);
     for (const project in metrics) {
       console.log(`  Project: ${project}`);
       for (const bundler in metrics[project]) {
         console.log(
-          `    ${bundler}: ${metrics[project][bundler]} ms`
+          `    ${bundler}: ${metrics[project][bundler]} ${unit}`
         );
       }
     }
