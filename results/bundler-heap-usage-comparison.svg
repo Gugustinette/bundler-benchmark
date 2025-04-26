@@ -1,0 +1,51 @@
+<svg width="900" height="600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="600" fill="white" />
+  <text x="450" y="30" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle">Heap Usage Benchmark (less is better)</text>
+  <g transform="translate(80, 60)">
+    <line x1="0" y1="480" x2="700" y2="480" stroke="#ddd" stroke-width="1" />
+    <text x="-10" y="480" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">0</text>
+    <line x1="0" y1="432" x2="700" y2="432" stroke="#ddd" stroke-width="1" />
+    <text x="-10" y="432" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">40</text>
+    <line x1="0" y1="384" x2="700" y2="384" stroke="#ddd" stroke-width="1" />
+    <text x="-10" y="384" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">80</text>
+    <line x1="0" y1="336" x2="700" y2="336" stroke="#ddd" stroke-width="1" />
+    <text x="-10" y="336" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">120</text>
+    <line x1="0" y1="288" x2="700" y2="288" stroke="#ddd" stroke-width="1" />
+    <text x="-10" y="288" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">160</text>
+    <line x1="0" y1="240" x2="700" y2="240" stroke="#ddd" stroke-width="1" />
+    <text x="-10" y="240" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">200</text>
+    <line x1="0" y1="192" x2="700" y2="192" stroke="#ddd" stroke-width="1" />
+    <text x="-10" y="192" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">240</text>
+    <line x1="0" y1="144" x2="700" y2="144" stroke="#ddd" stroke-width="1" />
+    <text x="-10" y="144" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">280</text>
+    <line x1="0" y1="96" x2="700" y2="96" stroke="#ddd" stroke-width="1" />
+    <text x="-10" y="96" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">320</text>
+    <line x1="0" y1="48" x2="700" y2="48" stroke="#ddd" stroke-width="1" />
+    <text x="-10" y="48" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">360</text>
+    <line x1="0" y1="0" x2="700" y2="0" stroke="#ddd" stroke-width="1" />
+    <text x="-10" y="0" font-family="Arial, sans-serif" font-size="12" text-anchor="end" dominant-baseline="middle">400</text>
+    <text x="-40" y="240" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" transform="rotate(-90, -40, 240)">Heap Usage (MB)</text>
+    <line x1="0" y1="480" x2="700" y2="480" stroke="#000" stroke-width="1" />
+    <text x="175" y="510" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">thousand-functions</text>
+    <rect x="70" y="307.7252563476562" width="56" height="172.27474365234374" fill="#4285F4" />
+    <text x="98" y="393.8626281738281" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#fff" dominant-baseline="middle">144 MB</text>
+    <rect x="140" y="478.7938077059659" width="56" height="1.206192294034091" fill="#34A853" />
+    <text x="168" y="473.7938077059659" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">1 MB</text>
+    <rect x="210" y="471.5583746337891" width="56" height="8.441625366210937" fill="#FBBC05" />
+    <text x="238" y="466.5583746337891" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">7 MB</text>
+    <text x="525" y="510" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">thousand-typed-functions</text>
+    <rect x="420" y="7.320684814453159" width="56" height="472.67931518554684" fill="#4285F4" />
+    <text x="448" y="243.66034240722658" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#fff" dominant-baseline="middle">394 MB</text>
+    <rect x="490" y="475.8921646118164" width="56" height="4.107835388183593" fill="#34A853" />
+    <text x="518" y="470.8921646118164" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">3 MB</text>
+    <rect x="560" y="403.1470980834961" width="56" height="76.85290191650392" fill="#FBBC05" />
+    <text x="588" y="441.57354904174804" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#fff" dominant-baseline="middle">64 MB</text>
+    <text x="710" y="0" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="start">Bundlers:</text>
+    <rect x="710" y="25" width="15" height="15" fill="#4285F4" />
+    <text x="735" y="37" font-family="Arial, sans-serif" font-size="12" text-anchor="start">unbuild</text>
+    <rect x="710" y="50" width="15" height="15" fill="#34A853" />
+    <text x="735" y="62" font-family="Arial, sans-serif" font-size="12" text-anchor="start">tsup</text>
+    <rect x="710" y="75" width="15" height="15" fill="#FBBC05" />
+    <text x="735" y="87" font-family="Arial, sans-serif" font-size="12" text-anchor="start">tsdown</text>
+  </g>
+</svg>
