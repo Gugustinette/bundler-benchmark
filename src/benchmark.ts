@@ -76,12 +76,14 @@ const benchmark = async () => {
   // Generate the SVG chart
   const executionTimeSvgChart = MetricsUtil.generateBarChart(executionTimeMetrics, {
     title: "Execution Time Benchmark (less is better)",
+    yAxisLabel: "Execution Time (ms)",
     width: 900,
     height: 600,
     formatValue: (value) => `${value.toFixed(0)} ms`,
   });
   const heapUsageSvgChart = MetricsUtil.generateBarChart(heapUsageMetrics, {
     title: "Heap Usage Benchmark (less is better)",
+    yAxisLabel: "Heap Usage (MB)",
     width: 900,
     height: 600,
     formatValue: (value) => `${value.toFixed(0)} MB`,

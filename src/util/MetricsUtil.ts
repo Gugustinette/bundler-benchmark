@@ -72,7 +72,7 @@ export class MetricsUtil {
         const value = metrics[project][bundler];
         if (typeof value !== "number" || isNaN(value)) {
           throw new Error(
-            `Invalid execution time for bundler "${bundler}" in project "${project}": number expected`
+            `Invalid data for bundler "${bundler}" in project "${project}": number expected`
           );
         }
 
