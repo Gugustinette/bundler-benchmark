@@ -5,14 +5,15 @@
   "author": "Gugustinette",
   "main": "index.js",
   "scripts": {
-    "benchmark": "tsx src/benchmark.ts",
+    "build": "tsdown",
+    "benchmark": "node dist/benchmark.mjs",
     "generate": "tsx src/generate.ts"
   },
   "keywords": [],
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^22.14.1",
-    "tsdown": "^0.9.1",
+    "@types/node": "^22.15.2",
+    "tsdown": "https://pkg.pr.new/tsdown@460519c",
     "tsup": "^8.4.0",
     "tsx": "^4.19.3",
     "unbuild": "^3.5.0"
