@@ -13,7 +13,7 @@ export const build = async (options: BundlerOptions) => {
     outDir: outputDir,
     clean: true,
     sourcemap: true,
-    declaration: options.dts || false,
+    declaration: options.dts ? 'node16' : false,
     rollup: {
       emitCJS: false,
       esbuild: {
