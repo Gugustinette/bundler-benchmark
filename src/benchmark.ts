@@ -1,8 +1,9 @@
 import { build as buildUnbuild } from './bundlers/unbuild';
 import { build as buildTsup } from './bundlers/tsup';
 import { build as buildTsdown } from './bundlers/tsdown';
-import { BarChartMetrics, MetricsUtil } from './util/MetricsUtil';
 import { bench, run } from 'mitata';
+import { BarChartMetrics, generateBarChart } from 'svgraph';
+import { MetricsUtil } from './util/MetricsUtil';
 
 const projects = [
   {
@@ -74,14 +75,14 @@ const benchmark = async () => {
   MetricsUtil.logMetrics("Heap Usage Benchmark", "MB", heapUsageMetrics);
 
   // Generate the SVG chart
-  const executionTimeSvgChart = MetricsUtil.generateBarChart(executionTimeMetrics, {
+  const executionTimeSvgChart = generateBarChart(executionTimeMetrics, {
     title: "Execution Time Benchmark (less is better)",
     yAxisLabel: "Execution Time (ms)",
     width: 900,
     height: 600,
     formatValue: (value) => `${value.toFixed(0)} ms`,
   });
-  const heapUsageSvgChart = MetricsUtil.generateBarChart(heapUsageMetrics, {
+  const heapUsageSvgChart = generateBarChart(heapUsageMetrics, {
     title: "Heap Usage Benchmark (less is better)",
     yAxisLabel: "Heap Usage (MB)",
     width: 900,
