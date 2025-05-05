@@ -27,19 +27,19 @@
     <text x="-40" y="240" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" transform="rotate(-90, -40, 240)">Heap Usage (MB)</text>
     <line x1="0" y1="480" x2="700" y2="480" stroke="#000" stroke-width="1" />
     <text x="175" y="510" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">thousand-functions</text>
-    <rect x="70" y="341.7956762695312" width="56" height="138.20432373046876" fill="#4285F4" />
-    <text x="98" y="410.8978381347656" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#fff" dominant-baseline="middle">144 MB</text>
-    <rect x="140" y="479.04572420987216" width="56" height="0.9542757901278408" fill="#34A853" />
-    <text x="168" y="474.04572420987216" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">1 MB</text>
-    <rect x="210" y="474.19536865234375" width="56" height="5.80463134765625" fill="#FBBC05" />
-    <text x="238" y="469.19536865234375" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">6 MB</text>
+    <rect x="70" y="364.4920434570313" width="56" height="115.50795654296874" fill="#4285F4" />
+    <text x="98" y="422.24602172851564" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#fff" dominant-baseline="middle">120 MB</text>
+    <rect x="140" y="479.05066872336647" width="56" height="0.9493312766335228" fill="#34A853" />
+    <text x="168" y="474.05066872336647" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">1 MB</text>
+    <rect x="210" y="472.9159365234375" width="56" height="7.0840634765625" fill="#FBBC05" />
+    <text x="238" y="467.9159365234375" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">7 MB</text>
     <text x="525" y="510" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">thousand-typed-functions</text>
-    <rect x="420" y="31.44482421875" width="56" height="448.55517578125" fill="#4285F4" />
-    <text x="448" y="255.722412109375" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#fff" dominant-baseline="middle">467 MB</text>
-    <rect x="490" y="476.5674990234375" width="56" height="3.4325009765625" fill="#34A853" />
-    <text x="518" y="471.5674990234375" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">4 MB</text>
-    <rect x="560" y="399.6871275745739" width="56" height="80.31287242542614" fill="#FBBC05" />
-    <text x="588" y="439.84356378728694" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#fff" dominant-baseline="middle">84 MB</text>
+    <rect x="420" y="22.4705810546875" width="56" height="457.5294189453125" fill="#4285F4" />
+    <text x="448" y="251.23529052734375" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#fff" dominant-baseline="middle">477 MB</text>
+    <rect x="490" y="476.77876318359375" width="56" height="3.22123681640625" fill="#34A853" />
+    <text x="518" y="471.77876318359375" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">3 MB</text>
+    <rect x="560" y="405.40849764737214" width="56" height="74.59150235262784" fill="#FBBC05" />
+    <text x="588" y="442.70424882368604" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#fff" dominant-baseline="middle">78 MB</text>
     <text x="710" y="0" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="start">Items:</text>
     <rect x="710" y="25" width="15" height="15" fill="#4285F4" />
     <text x="735" y="37" font-family="Arial, sans-serif" font-size="12" text-anchor="start">unbuild</text>
