@@ -6,18 +6,21 @@
   "main": "index.js",
   "scripts": {
     "build": "tsdown",
+    "dev": "npm run build && node dist/benchmark.mjs",
     "benchmark": "node dist/benchmark.mjs",
     "generate": "tsx src/generate.ts"
   },
   "keywords": [],
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^22.15.2",
+    "@rslib/core": "^0.8.0",
+    "@types/node": "^22.15.21",
     "mitata": "^1.0.34",
     "svgraph": "^0.0.1",
-    "tsdown": "^0.11.0",
-    "tsup": "^8.4.0",
+    "tsdown": "^0.12.1",
+    "tsup": "^8.5.0",
     "tsx": "^4.19.3",
+    "typescript": "^5.8.3",
     "unbuild": "^3.5.0"
   }
 }

@@ -27,19 +27,23 @@
     <text x="-40" y="240" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" transform="rotate(-90, -40, 240)">Execution Time (ms)</text>
     <line x1="0" y1="480" x2="700" y2="480" stroke="#000" stroke-width="1" />
     <text x="175" y="510" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">thousand-functions</text>
-    <rect x="70" y="371.88515709" width="56" height="108.11484291000001" fill="#4285F4" />
-    <text x="98" y="425.942578545" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#fff" dominant-baseline="middle">901 ms</text>
-    <rect x="140" y="468.55912084" width="56" height="11.44087915999998" fill="#34A853" />
-    <text x="168" y="463.55912084" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">95 ms</text>
-    <rect x="210" y="472.15656209" width="56" height="7.843437909999999" fill="#FBBC05" />
-    <text x="238" y="467.15656209" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">65 ms</text>
+    <rect x="70" y="367.18057666" width="42" height="112.81942334" fill="#4285F4" />
+    <text x="91" y="423.59028832999996" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#fff" dominant-baseline="middle">940 ms</text>
+    <rect x="122.5" y="470.2875779" width="42" height="9.7124221" fill="#34A853" />
+    <text x="143.5" y="465.2875779" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">81 ms</text>
+    <rect x="175" y="473.34870777333333" width="42" height="6.6512922266666665" fill="#FBBC05" />
+    <text x="196" y="468.34870777333333" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">55 ms</text>
+    <rect x="227.5" y="326.14867125" width="42" height="153.85132874999996" fill="#EA4335" />
+    <text x="248.5" y="403.074335625" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#fff" dominant-baseline="middle">1282 ms</text>
     <text x="525" y="510" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">thousand-typed-functions</text>
-    <rect x="420" y="93.19811124" width="56" height="386.80188876" fill="#4285F4" />
-    <text x="448" y="286.59905562" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#fff" dominant-baseline="middle">3223 ms</text>
-    <rect x="490" y="66.53791168000004" width="56" height="413.46208831999996" fill="#34A853" />
-    <text x="518" y="273.26895584" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#fff" dominant-baseline="middle">3446 ms</text>
-    <rect x="560" y="431.33854585" width="56" height="48.661454150000004" fill="#FBBC05" />
-    <text x="588" y="455.66927292500003" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#fff" dominant-baseline="middle">406 ms</text>
+    <rect x="420" y="85.79754710000003" width="42" height="394.20245289999997" fill="#4285F4" />
+    <text x="441" y="282.89877355" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#fff" dominant-baseline="middle">3285 ms</text>
+    <rect x="472.5" y="64.23662791000004" width="42" height="415.76337208999996" fill="#34A853" />
+    <text x="493.5" y="272.118313955" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#fff" dominant-baseline="middle">3465 ms</text>
+    <rect x="525" y="430.34250208" width="42" height="49.657497920000004" fill="#FBBC05" />
+    <text x="546" y="455.17125103999996" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#fff" dominant-baseline="middle">414 ms</text>
+    <rect x="577.5" y="290.5418966599997" width="42" height="189.4581033400003" fill="#EA4335" />
+    <text x="598.5" y="385.27094832999984" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#fff" dominant-baseline="middle">1579 ms</text>
     <text x="710" y="0" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="start">Items:</text>
     <rect x="710" y="25" width="15" height="15" fill="#4285F4" />
     <text x="735" y="37" font-family="Arial, sans-serif" font-size="12" text-anchor="start">unbuild</text>
@@ -47,5 +51,7 @@
     <text x="735" y="62" font-family="Arial, sans-serif" font-size="12" text-anchor="start">tsup</text>
     <rect x="710" y="75" width="15" height="15" fill="#FBBC05" />
     <text x="735" y="87" font-family="Arial, sans-serif" font-size="12" text-anchor="start">tsdown</text>
+    <rect x="710" y="100" width="15" height="15" fill="#EA4335" />
+    <text x="735" y="112" font-family="Arial, sans-serif" font-size="12" text-anchor="start">rslib</text>
   </g>
 </svg>

@@ -1,6 +1,7 @@
 import { build as buildUnbuild } from './bundlers/unbuild';
 import { build as buildTsup } from './bundlers/tsup';
 import { build as buildTsdown } from './bundlers/tsdown';
+import { build as buildRslib } from './bundlers/rslib';
 import { bench, run } from 'mitata';
 import { BarChartMetrics, generateBarChart } from 'svgraph';
 import { MetricsUtil } from './util/MetricsUtil';
@@ -43,6 +44,12 @@ const benchmark = async () => {
     });
     bench(`${project.name}@tsdown`, async () => {
       await buildTsdown({
+        project: project.name,
+        ...project.bundlerOptions,
+      });
+    });
+    bench(`${project.name}@rslib`, async () => {
+      await buildRslib({
         project: project.name,
         ...project.bundlerOptions,
       });
