@@ -16,11 +16,15 @@ Results (benchmarked on MacBook M1 Pro 16GB RAM):
 
 - Install dependencies
 ```bash
-npm install && npm run build
+npm install
 ```
 - Generate the benchmark data
 ```bash
 npm run generate
+```
+- Build the benchmark code
+```bash
+npm run build
 ```
 - Run the benchmark
 ```bash

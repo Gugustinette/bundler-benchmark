@@ -18,7 +18,7 @@ export const build = async (options: BundlerOptions) => {
     minify: true,
     silent: true,
     dts: options.dts ? {
-      isolatedDeclarations: true,
+      isolatedDeclarations: options.isolatedDeclarations ?? true,
     } : false,
   });
 };
