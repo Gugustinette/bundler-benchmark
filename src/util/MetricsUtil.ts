@@ -1,25 +1,29 @@
-import { BarChartMetrics } from "svgraph";
+export interface BarChartMetrics {
+  [group: string]: {
+    [item: string]: number;
+  };
+}
 
 /**
  * Utility class for handling metrics
  */
 export class MetricsUtil {
   /**
-   * Saves the SVG chart to a file (Node.js environment only)
-   * @param svg SVG content to save
-   * @param filePath Path to save the file
+   * Save given metrics to a JSON file
+   * @param metrics Object containing project metrics data
+   * @param filePath Path to save the JSON file
    */
-  public static saveSvgToFile(svg: string, filePath: string): void {
+  public static saveMetricsToJson(metrics: BarChartMetrics, filePath: string): void {
     try {
       // Check if we're in a Node.js environment
       if (typeof require !== "undefined") {
         const fs = require("fs");
-        fs.writeFileSync(filePath, svg, "utf8");
+        fs.writeFileSync(filePath, JSON.stringify(metrics, null, 2), "utf8");
       } else {
         throw new Error("This method can only be used in a Node.js environment");
       }
     } catch (error) {
-      console.error("Error saving SVG to file:", error);
+      console.error("Error saving metrics to JSON file:", error);
       throw error;
     }
   }
