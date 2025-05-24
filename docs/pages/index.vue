@@ -20,7 +20,7 @@
       It includes two scenarios: one with regular functions and another with
       typed functions (generating dts).
       <br />
-      Benchmark was run on a MacBook Pro M1 Pro with 16GB of RAM, using Node.js
+      Benchmark was run on a MacBook M1 Pro with 16GB of RAM, using Node.js
       v22.2.0.
       <br />
       Source code for the benchmark is available on
