@@ -6,6 +6,8 @@ Benchmark some popular TS bundlers:
 - [unbuild](https://github.com/unjs/unbuild)
 - [rslib](https://lib.rsbuild.dev/)
 
+Results are available at [gugustinette.github.io/bundler-benchmark](https://gugustinette.github.io/bundler-benchmark/).
+
 ### Development
 
 - Install dependencies
