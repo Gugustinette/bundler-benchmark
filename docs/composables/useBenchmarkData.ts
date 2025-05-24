@@ -11,14 +11,14 @@ interface BenchmarkData {
 
 export const useBenchmarkData = async (): Promise<BenchmarkData> => {
   // Get Execution Time Benchmark Data
-  let response = await fetch('/results/bundler-execution-time-comparison.json');
+  let response = await fetch('/bundler-benchmark/results/bundler-execution-time-comparison.json');
   if (!response.ok) {
     throw new Error('Failed to fetch benchmark data');
   }
   const executionTimeData = await response.json();
 
   // Get Heap Usage Benchmark Data
-  response = await fetch('/results/bundler-heap-usage-comparison.json');
+  response = await fetch('/bundler-benchmark/results/bundler-heap-usage-comparison.json');
   if (!response.ok) {
     throw new Error('Failed to fetch benchmark data');
   }
