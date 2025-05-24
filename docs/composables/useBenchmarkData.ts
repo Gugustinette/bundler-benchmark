@@ -4,7 +4,7 @@ export interface BarChartData {
 export interface BarChartMetrics {
   [group: string]: BarChartData;
 }
-interface BenchmarkData {
+export interface BenchmarkData {
   executionTime: BarChartMetrics;
   heapUsage: BarChartMetrics;
 }

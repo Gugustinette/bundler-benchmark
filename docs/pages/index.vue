@@ -18,24 +18,30 @@
       Source code for the benchmark is available on <a href="https://github.com/gugustinette/bundler-benchmark" target="_blank">GitHub</a>.
     </p>
 
-    <!-- Execution Time -->
-    <h2>Execution Time (less is better)</h2>
-    <h3>Thousand Function</h3>
+    <!-- Execution time by heap usage bubble chart -->
+    <h2>Execution time by heap usage</h2>
+    <div class="chart-container">
+      <canvas ref="chartExecutionTimeByHeapUsage"></canvas>
+    </div>
+
+    <!-- Execution time -->
+    <h2>Execution time (less is better)</h2>
+    <h3>Thousand function</h3>
     <div class="chart-container">
       <canvas ref="chartExecutionTime_ThousandFunctions"></canvas>
     </div>
-    <h3>Thousand Typed Function</h3>
+    <h3>Thousand typed function</h3>
     <div class="chart-container">
       <canvas ref="chartExecutionTime_ThousandTypedFunctions"></canvas>
     </div>
 
-    <!-- Heap Usage -->
-    <h2>Heap Usage (less is better)</h2>
-    <h3>Thousand Function</h3>
+    <!-- Heap usage -->
+    <h2>Heap usage (less is better)</h2>
+    <h3>Thousand function</h3>
     <div class="chart-container">
       <canvas ref="chartHeapUsage_ThousandFunctions"></canvas>
     </div>
-    <h3>Thousand Typed Function</h3>
+    <h3>Thousand typed function</h3>
     <div class="chart-container">
       <canvas ref="chartHeapUsage_ThousandTypedFunctions"></canvas>
     </div>
@@ -46,6 +52,7 @@
 import { onMounted, ref } from 'vue';
 import { renderBarChart } from '#imports';
 
+const chartExecutionTimeByHeapUsage = ref<HTMLCanvasElement | null>(null);
 const chartExecutionTime_ThousandFunctions = ref<HTMLCanvasElement | null>(null);
 const chartExecutionTime_ThousandTypedFunctions = ref<HTMLCanvasElement | null>(null);
 const chartHeapUsage_ThousandFunctions = ref<HTMLCanvasElement | null>(null);
@@ -56,17 +63,44 @@ onMounted(async () => {
   const benchmarkData = await useBenchmarkData();
 
   // Render charts
+  if (chartExecutionTimeByHeapUsage.value) {
+    renderBubbleChart({
+      canvas: chartExecutionTimeByHeapUsage.value,
+      data: benchmarkData
+    });
+  }
+
   if (chartExecutionTime_ThousandFunctions.value) {
-    renderBarChart(chartExecutionTime_ThousandFunctions.value, benchmarkData.executionTime["thousand-functions"]);
+    renderBarChart({
+      canvas: chartExecutionTime_ThousandFunctions.value,
+      data: benchmarkData.executionTime["thousand-functions"],
+      yAxisTitle: 'Execution Time (ms)',
+      measurementUnit: 'ms',
+    });
   }
   if (chartExecutionTime_ThousandTypedFunctions.value) {
-    renderBarChart(chartExecutionTime_ThousandTypedFunctions.value, benchmarkData.executionTime["thousand-typed-functions"]);
+    renderBarChart({
+      canvas: chartExecutionTime_ThousandTypedFunctions.value,
+      data: benchmarkData.executionTime["thousand-typed-functions"],
+      yAxisTitle: 'Execution Time (ms)',
+      measurementUnit: 'ms',
+    });
   }
   if (chartHeapUsage_ThousandFunctions.value) {
-    renderBarChart(chartHeapUsage_ThousandFunctions.value, benchmarkData.heapUsage["thousand-functions"]);
+    renderBarChart({
+      canvas: chartHeapUsage_ThousandFunctions.value,
+      data: benchmarkData.heapUsage["thousand-functions"],
+      yAxisTitle: 'Heap Usage (MB)',
+      measurementUnit: 'MB',
+    });
   }
   if (chartHeapUsage_ThousandTypedFunctions.value) {
-    renderBarChart(chartHeapUsage_ThousandTypedFunctions.value, benchmarkData.heapUsage["thousand-typed-functions"]);
+    renderBarChart({
+      canvas: chartHeapUsage_ThousandTypedFunctions.value,
+      data: benchmarkData.heapUsage["thousand-typed-functions"],
+      yAxisTitle: 'Heap Usage (MB)',
+      measurementUnit: 'MB',
+    });
   }
 });
 </script>
