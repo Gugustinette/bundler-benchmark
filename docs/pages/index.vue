@@ -11,21 +11,31 @@
       <li><a href="https://lib.rsbuild.dev/" target="_blank">rslib</a></li>
     </ul>
     <p>
-      It includes two scenarios: one with regular functions and another with typed functions.
+      It includes two scenarios: one with regular functions and another with typed functions (generating dts).
       <br />
-      Benchmarked on MacBook M1 Pro 16GB RAM.
+      Benchmark was run on a MacBook Pro M1 Pro with 16GB of RAM, using Node.js v22.2.0.
+      <br />
+      Source code for the benchmark is available on <a href="https://github.com/gugustinette/bundler-benchmark" target="_blank">GitHub</a>.
     </p>
+
+    <!-- Execution Time -->
     <h2>Execution Time (less is better)</h2>
+    <h3>Thousand Function</h3>
     <div class="chart-container">
       <canvas ref="chartExecutionTime_ThousandFunctions"></canvas>
     </div>
+    <h3>Thousand Typed Function</h3>
     <div class="chart-container">
       <canvas ref="chartExecutionTime_ThousandTypedFunctions"></canvas>
     </div>
+
+    <!-- Heap Usage -->
     <h2>Heap Usage (less is better)</h2>
+    <h3>Thousand Function</h3>
     <div class="chart-container">
       <canvas ref="chartHeapUsage_ThousandFunctions"></canvas>
     </div>
+    <h3>Thousand Typed Function</h3>
     <div class="chart-container">
       <canvas ref="chartHeapUsage_ThousandTypedFunctions"></canvas>
     </div>

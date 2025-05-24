@@ -1,6 +1,11 @@
 <template>
   <NuxtLayout>
     <NuxtPage />
+    <footer>
+      <p>
+        Made with 💛 by <a href="https://github.com/gugustinette/" target="_blank">Gugustinette</a>.
+      </p>
+    </footer>
   </NuxtLayout>
 </template>
 
@@ -25,5 +30,12 @@ p {
 }
 ul {
   color: #CCCCCC;
+}
+footer {
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  margin-top: 4rem;
+  padding: 1rem;
 }
 </style>
