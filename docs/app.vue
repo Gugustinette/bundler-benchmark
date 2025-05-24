@@ -3,7 +3,10 @@
     <NuxtPage />
     <footer>
       <p>
-        Made with 💛 by <a href="https://github.com/gugustinette/" target="_blank">Gugustinette</a>.
+        Made with 💛 by
+        <a href="https://github.com/gugustinette/" target="_blank"
+          >Gugustinette</a
+        >.
       </p>
     </footer>
   </NuxtLayout>
@@ -14,8 +17,8 @@ body {
   padding: 0;
   margin: 0;
   font-family: "Nunito Sans", sans-serif;
-  background-color: #0F0F0F;
-  color: #FFFFFF;
+  background-color: #0f0f0f;
+  color: #ffffff;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,10 +30,10 @@ a {
   text-decoration: none;
 }
 p {
-  color: #CCCCCC;
+  color: #cccccc;
 }
 ul {
-  color: #CCCCCC;
+  color: #cccccc;
 }
 footer {
   bottom: 0;
