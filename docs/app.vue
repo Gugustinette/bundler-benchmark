@@ -20,6 +20,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  overflow-x: hidden;
 }
 a {
   color: #ee711e;
