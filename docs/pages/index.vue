@@ -49,59 +49,65 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
-import { renderBarChart } from '#imports';
+import { onMounted, ref } from "vue";
+import { renderBarChart } from "#imports";
 
 const chartExecutionTimeByHeapUsage = ref<HTMLCanvasElement | null>(null);
-const chartExecutionTime_ThousandFunctions = ref<HTMLCanvasElement | null>(null);
-const chartExecutionTime_ThousandTypedFunctions = ref<HTMLCanvasElement | null>(null);
+const chartExecutionTime_ThousandFunctions = ref<HTMLCanvasElement | null>(
+	null,
+);
+const chartExecutionTime_ThousandTypedFunctions = ref<HTMLCanvasElement | null>(
+	null,
+);
 const chartHeapUsage_ThousandFunctions = ref<HTMLCanvasElement | null>(null);
-const chartHeapUsage_ThousandTypedFunctions = ref<HTMLCanvasElement | null>(null);
+const chartHeapUsage_ThousandTypedFunctions = ref<HTMLCanvasElement | null>(
+	null,
+);
 
 onMounted(async () => {
-  // Get benchmark data
-  const benchmarkData = await useBenchmarkData();
+	// Get benchmark data
+	const benchmarkData = await useBenchmarkData();
 
-  // Render charts
-  if (chartExecutionTimeByHeapUsage.value) {
-    renderBubbleChart({
-      canvas: chartExecutionTimeByHeapUsage.value,
-      data: benchmarkData
-    });
-  }
+	// Render charts
+	if (chartExecutionTimeByHeapUsage.value) {
+		renderBubbleChart({
+			canvas: chartExecutionTimeByHeapUsage.value,
+			data: benchmarkData,
+		});
+	}
 
-  if (chartExecutionTime_ThousandFunctions.value) {
-    renderBarChart({
-      canvas: chartExecutionTime_ThousandFunctions.value,
-      data: benchmarkData.executionTime["thousand-functions"],
-      yAxisTitle: 'Execution Time (ms)',
-      measurementUnit: 'ms',
-    });
-  }
-  if (chartExecutionTime_ThousandTypedFunctions.value) {
-    renderBarChart({
-      canvas: chartExecutionTime_ThousandTypedFunctions.value,
-      data: benchmarkData.executionTime["thousand-typed-functions"],
-      yAxisTitle: 'Execution Time (ms)',
-      measurementUnit: 'ms',
-    });
-  }
-  if (chartHeapUsage_ThousandFunctions.value) {
-    renderBarChart({
-      canvas: chartHeapUsage_ThousandFunctions.value,
-      data: benchmarkData.heapUsage["thousand-functions"],
-      yAxisTitle: 'Heap Usage (MB)',
-      measurementUnit: 'MB',
-    });
-  }
-  if (chartHeapUsage_ThousandTypedFunctions.value) {
-    renderBarChart({
-      canvas: chartHeapUsage_ThousandTypedFunctions.value,
-      data: benchmarkData.heapUsage["thousand-typed-functions"],
-      yAxisTitle: 'Heap Usage (MB)',
-      measurementUnit: 'MB',
-    });
-  }
+	if (chartExecutionTime_ThousandFunctions.value) {
+		renderBarChart({
+			canvas: chartExecutionTime_ThousandFunctions.value,
+			data: benchmarkData.executionTime["thousand-functions"],
+			yAxisTitle: "Execution Time (ms)",
+			measurementUnit: "ms",
+		});
+	}
+	if (chartExecutionTime_ThousandTypedFunctions.value) {
+		renderBarChart({
+			canvas: chartExecutionTime_ThousandTypedFunctions.value,
+			data: benchmarkData.executionTime["thousand-typed-functions"],
+			yAxisTitle: "Execution Time (ms)",
+			measurementUnit: "ms",
+		});
+	}
+	if (chartHeapUsage_ThousandFunctions.value) {
+		renderBarChart({
+			canvas: chartHeapUsage_ThousandFunctions.value,
+			data: benchmarkData.heapUsage["thousand-functions"],
+			yAxisTitle: "Heap Usage (MB)",
+			measurementUnit: "MB",
+		});
+	}
+	if (chartHeapUsage_ThousandTypedFunctions.value) {
+		renderBarChart({
+			canvas: chartHeapUsage_ThousandTypedFunctions.value,
+			data: benchmarkData.heapUsage["thousand-typed-functions"],
+			yAxisTitle: "Heap Usage (MB)",
+			measurementUnit: "MB",
+		});
+	}
 });
 </script>
 

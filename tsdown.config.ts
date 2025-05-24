@@ -1,6 +1,6 @@
-import { defineConfig } from 'tsdown'
+import { defineConfig } from "tsdown";
 
 export default defineConfig({
-  entry: ['src/benchmark.ts'],
-  skipNodeModulesBundle: true,
-})
+	entry: ["src/benchmark.ts"],
+	skipNodeModulesBundle: true,
+});
