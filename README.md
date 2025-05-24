@@ -6,12 +6,6 @@ Benchmark some popular TS bundlers:
 - [unbuild](https://github.com/unjs/unbuild)
 - [rslib](https://lib.rsbuild.dev/)
 
-Results (benchmarked on MacBook M1 Pro 16GB RAM):
-
-<img src="results/bundler-execution-time-comparison.svg" alt="Benchmark Results" width="600" />
-
-<img src="results/bundler-heap-usage-comparison.svg" alt="Benchmark Results" width="600" />
-
 ### Development
 
 - Install dependencies
