@@ -3,7 +3,16 @@
     <h1>TS Bundler Benchmark</h1>
     <p>
       This benchmark compares the performance of popular TypeScript bundlers
-      when handling a large number of functions :
+      when bundling a thousand
+    <Tooltip>
+      <template #trigger>
+        <span style="border-bottom: 1px dashed #ee711e; cursor: pointer;">functions</span>
+      </template>
+      <template #content>
+        <p>This is the typical function used in the benchmark:</p>
+        <NuxtImg src="/ts-function.png" alt="Example TypeScript function" width="600" />
+      </template>
+    </Tooltip> :
     </p>
     <ul>
       <li>

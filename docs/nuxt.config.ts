@@ -5,7 +5,7 @@ export default defineNuxtConfig({
 	compatibilityDate: "2025-05-15",
 	ssr: false,
 	devtools: { enabled: true },
-	modules: ["@nuxt/fonts"],
+	modules: ["@nuxt/fonts", "@nuxt/image"],
 	app: {
 		baseURL: "/bundler-benchmark",
 	},
