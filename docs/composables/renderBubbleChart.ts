@@ -26,7 +26,7 @@ export const renderBubbleChart = ({
 	canvas,
 	data,
 	feature,
-}: BubbleChartOptions): void => {
+}: BubbleChartOptions): Chart => {
 	// Get the feature data
 	const featureData = data[feature];
 	if (!featureData) {
@@ -59,7 +59,7 @@ export const renderBubbleChart = ({
 		};
 	});
 
-	new Chart(canvas, {
+	return new Chart(canvas, {
 		type: "bubble",
 		data: {
 			datasets: datasets,

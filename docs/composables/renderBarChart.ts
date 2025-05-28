@@ -26,7 +26,7 @@ export const renderBarChart = ({
 	data,
 	feature,
 	measurement,
-}: BarChartOptions): void => {
+}: BarChartOptions): Chart => {
 	// Get the feature data
 	const featureData = data[feature];
 	if (!featureData) {
@@ -67,7 +67,7 @@ export const renderBarChart = ({
 		datasets: datasets,
 	};
 
-	new Chart(canvas, {
+	return new Chart(canvas, {
 		type: "bar",
 		data: chartData,
 		options: deepMerge({}, COMMON_CHART_OPTIONS, {

@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main class="dark-mode">
     <h1>TS Bundler Benchmark</h1>
     <p>
       This benchmark compares the performance of popular TypeScript bundlers
@@ -17,9 +17,6 @@
       <li><a href="https://lib.rsbuild.dev/" target="_blank">rslib</a></li>
     </ul>
     <p>
-      It includes two scenarios: one with regular functions and another with
-      typed functions (generating dts).
-      <br />
       Benchmark was run on a MacBook M1 Pro with 16GB of RAM, using Node.js
       v22.2.0.
       <br />
@@ -31,64 +28,135 @@
       >.
     </p>
 
+    <p>
+      You can visualize the results by selecting a specific feature from the
+      dropdown below. The charts will update to show execution time and heap
+      usage.
+    </p>
+    <Select
+      :options="featureList"
+      v-model="selectedFeature"
+      placeholder="Select a feature to visualize"
+      aria-label="Feature selection"
+    />
+
     <!-- Execution time by heap usage bubble chart -->
     <h2>Execution time by heap usage</h2>
     <div class="chart-container">
-      <canvas ref="chartExecutionTimeByHeapUsage"></canvas>
+      <canvas ref="executionTimeByHeapUsageCanva"></canvas>
     </div>
 
     <!-- Execution time -->
     <h2>Execution time (less is better)</h2>
     <div class="chart-container">
-      <canvas ref="chartExecutionTime"></canvas>
+      <canvas ref="executionTimeCanva"></canvas>
     </div>
 
     <!-- Heap usage -->
     <h2>Heap usage (less is better)</h2>
     <div class="chart-container">
-      <canvas ref="chartHeapUsage"></canvas>
+      <canvas ref="heapUsageCanva"></canvas>
     </div>
   </main>
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import { useBenchmarkResults } from "~/composables/useBenchmarkData";
+import type { Chart } from "chart.js";
+import {
+  type BenchmarkResults,
+  useBenchmarkResults,
+} from "~/composables/useBenchmarkData";
 
-const chartExecutionTimeByHeapUsage = ref<HTMLCanvasElement | null>(null);
-const chartExecutionTime = ref<HTMLCanvasElement | null>(null);
-const chartHeapUsage = ref<HTMLCanvasElement | null>(null);
+const benchmarkResults = ref<BenchmarkResults | null>(null);
+
+interface Option {
+  // biome-ignore lint/suspicious/noExplicitAny: Using any for flexibility in value types
+  value: any;
+  label: string;
+  disabled?: boolean;
+}
+const featureList: Option[] = [
+  { value: "default", label: "Default" },
+  { value: "minify", label: "Minification" },
+  { value: "sourcemap", label: "Source Maps" },
+  { value: "dts", label: "DTS" },
+];
+const selectedFeature = ref(featureList[0].value);
+
+// Executioe time by heap usage bubble chart
+const executionTimeByHeapUsageCanva = ref<HTMLCanvasElement | null>(null);
+let executionTimeByHeapUsageChart: Chart | null = null;
+// Execution time bar chart
+const executionTimeCanva = ref<HTMLCanvasElement | null>(null);
+let executionTimeChart: Chart | null = null;
+// Heap usage bar chart
+const heapUsageCanva = ref<HTMLCanvasElement | null>(null);
+let heapUsageChart: Chart | null = null;
 
 onMounted(async () => {
   // Get benchmark results
-  const benchmarkResults = await useBenchmarkResults();
+  benchmarkResults.value = await useBenchmarkResults();
 
   // Render charts
-  if (chartExecutionTimeByHeapUsage.value) {
-    renderBubbleChart({
-      canvas: chartExecutionTimeByHeapUsage.value,
-      data: benchmarkResults,
+  if (executionTimeByHeapUsageCanva.value) {
+    executionTimeByHeapUsageChart = renderBubbleChart({
+      canvas: executionTimeByHeapUsageCanva.value,
+      data: benchmarkResults.value,
       feature: "default",
     });
   }
 
-  if (chartExecutionTime.value) {
-    renderBarChart({
-      canvas: chartExecutionTime.value,
-      data: benchmarkResults,
+  if (executionTimeCanva.value) {
+    executionTimeChart = renderBarChart({
+      canvas: executionTimeCanva.value,
+      data: benchmarkResults.value,
       feature: "default",
       measurement: "executionTime",
     });
   }
-  if (chartHeapUsage.value) {
-    renderBarChart({
-      canvas: chartHeapUsage.value,
-      data: benchmarkResults,
+  if (heapUsageCanva.value) {
+    heapUsageChart = renderBarChart({
+      canvas: heapUsageCanva.value,
+      data: benchmarkResults.value,
       feature: "default",
       measurement: "heapUsage",
     });
   }
 });
+
+watch(
+  selectedFeature,
+  (newFeature) => {
+    if (!benchmarkResults.value) return;
+
+    // Update charts
+    if (executionTimeByHeapUsageChart) {
+      updateBubbleChart({
+        chart: executionTimeByHeapUsageChart,
+        data: benchmarkResults.value,
+        feature: newFeature,
+      });
+    }
+    if (executionTimeChart) {
+      updateBarChart({
+        chart: executionTimeChart,
+        data: benchmarkResults.value,
+        feature: newFeature,
+        measurement: "executionTime",
+      });
+    }
+    if (heapUsageChart) {
+      updateBarChart({
+        chart: heapUsageChart,
+        data: benchmarkResults.value,
+        feature: newFeature,
+        measurement: "heapUsage",
+      });
+    }
+  },
+  { immediate: true }
+);
 </script>
 
 <style>
