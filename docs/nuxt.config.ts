@@ -8,10 +8,22 @@ export default defineNuxtConfig({
 	modules: ["@nuxt/fonts", "@nuxt/image"],
 	app: {
 		baseURL: "/bundler-benchmark",
+		head: {
+			title: "TS Bundler Benchmark",
+			htmlAttrs: {
+				lang: "en",
+			},
+			link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+		},
 	},
 	fonts: {
 		assets: {
 			prefix: "/bundler-benchmark/_fonts/",
+		},
+	},
+	nitro: {
+		prerender: {
+			routes: ["/_ipx/w_600/ts-function.png"],
 		},
 	},
 });
