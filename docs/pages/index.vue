@@ -61,26 +61,26 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
 import type { Chart } from "chart.js";
+import { onMounted, ref } from "vue";
 import {
-  type BenchmarkResults,
-  useBenchmarkResults,
+	type BenchmarkResults,
+	useBenchmarkResults,
 } from "~/composables/useBenchmarkData";
 
 const benchmarkResults = ref<BenchmarkResults | null>(null);
 
 interface Option {
-  // biome-ignore lint/suspicious/noExplicitAny: Using any for flexibility in value types
-  value: any;
-  label: string;
-  disabled?: boolean;
+	// biome-ignore lint/suspicious/noExplicitAny: Using any for flexibility in value types
+	value: any;
+	label: string;
+	disabled?: boolean;
 }
 const featureList: Option[] = [
-  { value: "default", label: "Default" },
-  { value: "minify", label: "Minification" },
-  { value: "sourcemap", label: "Source Maps" },
-  { value: "dts", label: "DTS" },
+	{ value: "default", label: "Default" },
+	{ value: "minify", label: "Minification" },
+	{ value: "sourcemap", label: "Source Maps" },
+	{ value: "dts", label: "DTS" },
 ];
 const selectedFeature = ref(featureList[0].value);
 
@@ -95,67 +95,67 @@ const heapUsageCanva = ref<HTMLCanvasElement | null>(null);
 let heapUsageChart: Chart | null = null;
 
 onMounted(async () => {
-  // Get benchmark results
-  benchmarkResults.value = await useBenchmarkResults();
+	// Get benchmark results
+	benchmarkResults.value = await useBenchmarkResults();
 
-  // Render charts
-  if (executionTimeByHeapUsageCanva.value) {
-    executionTimeByHeapUsageChart = renderBubbleChart({
-      canvas: executionTimeByHeapUsageCanva.value,
-      data: benchmarkResults.value,
-      feature: "default",
-    });
-  }
+	// Render charts
+	if (executionTimeByHeapUsageCanva.value) {
+		executionTimeByHeapUsageChart = renderBubbleChart({
+			canvas: executionTimeByHeapUsageCanva.value,
+			data: benchmarkResults.value,
+			feature: "default",
+		});
+	}
 
-  if (executionTimeCanva.value) {
-    executionTimeChart = renderBarChart({
-      canvas: executionTimeCanva.value,
-      data: benchmarkResults.value,
-      feature: "default",
-      measurement: "executionTime",
-    });
-  }
-  if (heapUsageCanva.value) {
-    heapUsageChart = renderBarChart({
-      canvas: heapUsageCanva.value,
-      data: benchmarkResults.value,
-      feature: "default",
-      measurement: "heapUsage",
-    });
-  }
+	if (executionTimeCanva.value) {
+		executionTimeChart = renderBarChart({
+			canvas: executionTimeCanva.value,
+			data: benchmarkResults.value,
+			feature: "default",
+			measurement: "executionTime",
+		});
+	}
+	if (heapUsageCanva.value) {
+		heapUsageChart = renderBarChart({
+			canvas: heapUsageCanva.value,
+			data: benchmarkResults.value,
+			feature: "default",
+			measurement: "heapUsage",
+		});
+	}
 });
 
 watch(
-  selectedFeature,
-  (newFeature) => {
-    if (!benchmarkResults.value) return;
+	selectedFeature,
+	(newFeature) => {
+		if (!benchmarkResults.value) return;
 
-    // Update charts
-    if (executionTimeByHeapUsageChart) {
-      updateBubbleChart({
-        chart: executionTimeByHeapUsageChart,
-        data: benchmarkResults.value,
-        feature: newFeature,
-      });
-    }
-    if (executionTimeChart) {
-      updateBarChart({
-        chart: executionTimeChart,
-        data: benchmarkResults.value,
-        feature: newFeature,
-        measurement: "executionTime",
-      });
-    }
-    if (heapUsageChart) {
-      updateBarChart({
-        chart: heapUsageChart,
-        data: benchmarkResults.value,
-        feature: newFeature,
-        measurement: "heapUsage",
-      });
-    }
-  },
-  { immediate: true }
+		// Update charts
+		if (executionTimeByHeapUsageChart) {
+			updateBubbleChart({
+				chart: executionTimeByHeapUsageChart,
+				data: benchmarkResults.value,
+				feature: newFeature,
+			});
+		}
+		if (executionTimeChart) {
+			updateBarChart({
+				chart: executionTimeChart,
+				data: benchmarkResults.value,
+				feature: newFeature,
+				measurement: "executionTime",
+			});
+		}
+		if (heapUsageChart) {
+			updateBarChart({
+				chart: heapUsageChart,
+				data: benchmarkResults.value,
+				feature: newFeature,
+				measurement: "heapUsage",
+			});
+		}
+	},
+	{ immediate: true },
 );
 </script>
 

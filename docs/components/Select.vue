@@ -49,179 +49,179 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, onMounted, onBeforeUnmount } from "vue";
+import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
 
 interface Option {
-  // biome-ignore lint/suspicious/noExplicitAny: Using any for flexibility in value types
-  value: any;
-  label: string;
-  disabled?: boolean;
+	// biome-ignore lint/suspicious/noExplicitAny: Using any for flexibility in value types
+	value: any;
+	label: string;
+	disabled?: boolean;
 }
 
 const props = defineProps<{
-  options: Option[];
-  // biome-ignore lint/suspicious/noExplicitAny: Using any for flexibility in value types
-  modelValue: any;
-  placeholder?: string;
-  disabled?: boolean;
-  ariaLabel?: string;
+	options: Option[];
+	// biome-ignore lint/suspicious/noExplicitAny: Using any for flexibility in value types
+	modelValue: any;
+	placeholder?: string;
+	disabled?: boolean;
+	ariaLabel?: string;
 }>();
 
 const emit = defineEmits(["update:modelValue"]);
 
 const isOpen = ref(false);
 const selectedOption = computed(() =>
-  props.options.find((option) => option.value === props.modelValue)
+	props.options.find((option) => option.value === props.modelValue),
 );
 const selectRef = ref<HTMLElement | null>(null);
 const focusedIndex = ref(-1);
 
 const toggleOpen = () => {
-  if (!props.disabled) {
-    isOpen.value = !isOpen.value;
-    if (isOpen.value) {
-      // Set initial focus to the selected option or the first option
-      focusedIndex.value = selectedOption.value
-        ? props.options.findIndex(
-            (option) => option.value === selectedOption.value?.value
-          )
-        : 0;
-    } else {
-      focusedIndex.value = -1;
-    }
-  }
+	if (!props.disabled) {
+		isOpen.value = !isOpen.value;
+		if (isOpen.value) {
+			// Set initial focus to the selected option or the first option
+			focusedIndex.value = selectedOption.value
+				? props.options.findIndex(
+						(option) => option.value === selectedOption.value?.value,
+					)
+				: 0;
+		} else {
+			focusedIndex.value = -1;
+		}
+	}
 };
 
 const selectOption = (option: Option) => {
-  if (!option.disabled) {
-    emit("update:modelValue", option.value);
-    isOpen.value = false;
-    focusedIndex.value = -1; // Reset focused index on close
-  }
+	if (!option.disabled) {
+		emit("update:modelValue", option.value);
+		isOpen.value = false;
+		focusedIndex.value = -1; // Reset focused index on close
+	}
 };
 
 const closeOnOutsideClick = (event: MouseEvent) => {
-  if (selectRef.value && !selectRef.value.contains(event.target as Node)) {
-    isOpen.value = false;
-    focusedIndex.value = -1; // Reset focused index on close
-  }
+	if (selectRef.value && !selectRef.value.contains(event.target as Node)) {
+		isOpen.value = false;
+		focusedIndex.value = -1; // Reset focused index on close
+	}
 };
 
 const handleKeyDown = (event: KeyboardEvent) => {
-  switch (event.key) {
-    case "Enter":
-    case " ":
-      if (isOpen.value) {
-        if (focusedIndex.value !== -1) {
-          selectOption(props.options[focusedIndex.value]);
-        }
-      } else {
-        toggleOpen();
-      }
-      event.preventDefault();
-      break;
-    case "Escape":
-      if (isOpen.value) {
-        isOpen.value = false;
-        focusedIndex.value = -1; // Reset focused index on close
-        event.preventDefault();
-      }
-      break;
-    case "ArrowDown":
-      if (isOpen.value) {
-        event.preventDefault();
-        focusedIndex.value = (focusedIndex.value + 1) % props.options.length;
-        // Skip disabled options
-        while (props.options[focusedIndex.value]?.disabled) {
-          focusedIndex.value = (focusedIndex.value + 1) % props.options.length;
-        }
-        scrollToFocused();
-      } else {
-        toggleOpen();
-      }
-      break;
-    case "ArrowUp":
-      if (isOpen.value) {
-        event.preventDefault();
-        focusedIndex.value =
-          (focusedIndex.value - 1 + props.options.length) %
-          props.options.length;
-        // Skip disabled options
-        while (props.options[focusedIndex.value]?.disabled) {
-          focusedIndex.value =
-            (focusedIndex.value - 1 + props.options.length) %
-            props.options.length;
-        }
-        scrollToFocused();
-      } else {
-        toggleOpen();
-      }
-      break;
-    case "Home":
-      if (isOpen.value) {
-        event.preventDefault();
-        focusedIndex.value = 0;
-        // Skip disabled options
-        while (props.options[focusedIndex.value]?.disabled) {
-          focusedIndex.value = (focusedIndex.value + 1) % props.options.length;
-        }
-        scrollToFocused();
-      }
-      break;
-    case "End":
-      if (isOpen.value) {
-        event.preventDefault();
-        focusedIndex.value = props.options.length - 1;
-        // Skip disabled options
-        while (props.options[focusedIndex.value]?.disabled) {
-          focusedIndex.value =
-            (focusedIndex.value - 1 + props.options.length) %
-            props.options.length;
-        }
-        scrollToFocused();
-      }
-      break;
-  }
+	switch (event.key) {
+		case "Enter":
+		case " ":
+			if (isOpen.value) {
+				if (focusedIndex.value !== -1) {
+					selectOption(props.options[focusedIndex.value]);
+				}
+			} else {
+				toggleOpen();
+			}
+			event.preventDefault();
+			break;
+		case "Escape":
+			if (isOpen.value) {
+				isOpen.value = false;
+				focusedIndex.value = -1; // Reset focused index on close
+				event.preventDefault();
+			}
+			break;
+		case "ArrowDown":
+			if (isOpen.value) {
+				event.preventDefault();
+				focusedIndex.value = (focusedIndex.value + 1) % props.options.length;
+				// Skip disabled options
+				while (props.options[focusedIndex.value]?.disabled) {
+					focusedIndex.value = (focusedIndex.value + 1) % props.options.length;
+				}
+				scrollToFocused();
+			} else {
+				toggleOpen();
+			}
+			break;
+		case "ArrowUp":
+			if (isOpen.value) {
+				event.preventDefault();
+				focusedIndex.value =
+					(focusedIndex.value - 1 + props.options.length) %
+					props.options.length;
+				// Skip disabled options
+				while (props.options[focusedIndex.value]?.disabled) {
+					focusedIndex.value =
+						(focusedIndex.value - 1 + props.options.length) %
+						props.options.length;
+				}
+				scrollToFocused();
+			} else {
+				toggleOpen();
+			}
+			break;
+		case "Home":
+			if (isOpen.value) {
+				event.preventDefault();
+				focusedIndex.value = 0;
+				// Skip disabled options
+				while (props.options[focusedIndex.value]?.disabled) {
+					focusedIndex.value = (focusedIndex.value + 1) % props.options.length;
+				}
+				scrollToFocused();
+			}
+			break;
+		case "End":
+			if (isOpen.value) {
+				event.preventDefault();
+				focusedIndex.value = props.options.length - 1;
+				// Skip disabled options
+				while (props.options[focusedIndex.value]?.disabled) {
+					focusedIndex.value =
+						(focusedIndex.value - 1 + props.options.length) %
+						props.options.length;
+				}
+				scrollToFocused();
+			}
+			break;
+	}
 };
 
 const scrollToFocused = () => {
-  const optionsList = selectRef.value?.querySelector(".select-options");
-  const focusedOption = optionsList?.children[
-    focusedIndex.value
-  ] as HTMLElement;
-  if (focusedOption && optionsList) {
-    const optionsListRect = optionsList.getBoundingClientRect();
-    const focusedOptionRect = focusedOption.getBoundingClientRect();
+	const optionsList = selectRef.value?.querySelector(".select-options");
+	const focusedOption = optionsList?.children[
+		focusedIndex.value
+	] as HTMLElement;
+	if (focusedOption && optionsList) {
+		const optionsListRect = optionsList.getBoundingClientRect();
+		const focusedOptionRect = focusedOption.getBoundingClientRect();
 
-    if (focusedOptionRect.top < optionsListRect.top) {
-      optionsList.scrollTop -= optionsListRect.top - focusedOptionRect.top;
-    } else if (focusedOptionRect.bottom > optionsListRect.bottom) {
-      optionsList.scrollTop +=
-        focusedOptionRect.bottom - optionsListRect.bottom;
-    }
-  }
+		if (focusedOptionRect.top < optionsListRect.top) {
+			optionsList.scrollTop -= optionsListRect.top - focusedOptionRect.top;
+		} else if (focusedOptionRect.bottom > optionsListRect.bottom) {
+			optionsList.scrollTop +=
+				focusedOptionRect.bottom - optionsListRect.bottom;
+		}
+	}
 };
 
 // Watch for modelValue changes to update the focused index when the dropdown is opened
 watch(
-  () => props.modelValue,
-  () => {
-    if (isOpen.value) {
-      focusedIndex.value = selectedOption.value
-        ? props.options.findIndex(
-            (option) => option.value === selectedOption.value?.value
-          )
-        : 0;
-    }
-  }
+	() => props.modelValue,
+	() => {
+		if (isOpen.value) {
+			focusedIndex.value = selectedOption.value
+				? props.options.findIndex(
+						(option) => option.value === selectedOption.value?.value,
+					)
+				: 0;
+		}
+	},
 );
 
 onMounted(() => {
-  document.addEventListener("click", closeOnOutsideClick);
+	document.addEventListener("click", closeOnOutsideClick);
 });
 
 onBeforeUnmount(() => {
-  document.removeEventListener("click", closeOnOutsideClick);
+	document.removeEventListener("click", closeOnOutsideClick);
 });
 </script>
 
