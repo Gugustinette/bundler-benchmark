@@ -4,6 +4,7 @@ export interface BundlerOptions {
 	 */
 	project?: string;
 	// General bundler options
+	cjs?: boolean;
 	minify?: boolean;
 	sourcemap?: boolean;
 	dts?: boolean;

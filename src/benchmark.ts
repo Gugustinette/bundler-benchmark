@@ -45,6 +45,13 @@ const features: FeatureOptions[] = [
 		bundlerOptions: {},
 	},
 	{
+		name: "cjs",
+		project: "thousand-functions",
+		bundlerOptions: {
+			cjs: true,
+		},
+	},
+	{
 		name: "minify",
 		project: "thousand-functions",
 		bundlerOptions: {

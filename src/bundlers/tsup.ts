@@ -11,7 +11,7 @@ export const build = async (options: BundlerOptions) => {
 	await buildTsup({
 		entry: [entryFile],
 		outDir: outputDir,
-		format: "esm",
+		format: options.cjs ? "cjs" : "esm",
 		target: "esnext",
 		clean: true,
 		sourcemap: options.sourcemap || false,

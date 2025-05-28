@@ -19,7 +19,7 @@ export const build = async (options: BundlerOptions) => {
 			esbuild: {
 				minify: options.minify || false,
 				target: "esnext",
-				format: "esm",
+				format: options.cjs ? "cjs" : "esm",
 			},
 		},
 	});

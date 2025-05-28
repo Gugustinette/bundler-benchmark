@@ -1,90 +1,112 @@
 {
   "default": {
     "unbuild": {
-      "executionTime": 883.3926423333334,
-      "heapUsage": 142.4358149937221
+      "executionTime": 919.4257708333333,
+      "heapUsage": 143.50335584368025
     },
     "tsup": {
-      "executionTime": 78.69697591666635,
-      "heapUsage": 0.28809356689453125
+      "executionTime": 90.4458123333327,
+      "heapUsage": 0.3033731633966619
     },
     "tsdown (oxc)": {
-      "executionTime": 39.27985414285714,
-      "heapUsage": 6.542820930480957
+      "executionTime": 43.10114225,
+      "heapUsage": 6.884278615315755
     },
     "tsdown (tsc)": {
-      "executionTime": 36.84460553333333,
-      "heapUsage": 7.9164853777204245
+      "executionTime": 40.46023707692308,
+      "heapUsage": 7.763538360595703
     },
     "rslib": {
-      "executionTime": 1267.1000799999993,
-      "heapUsage": 6.442654927571614
+      "executionTime": 1271.4190659166668,
+      "heapUsage": 5.095797947474888
+    }
+  },
+  "cjs": {
+    "unbuild": {
+      "executionTime": 962.9050450833333,
+      "heapUsage": 155.01148986816406
+    },
+    "tsup": {
+      "executionTime": 76.0493645,
+      "heapUsage": 0.24486618041992186
+    },
+    "tsdown (oxc)": {
+      "executionTime": 37.95382493333333,
+      "heapUsage": 8.050945826939174
+    },
+    "tsdown (tsc)": {
+      "executionTime": 37.84201171428572,
+      "heapUsage": 7.916527884347098
+    },
+    "rslib": {
+      "executionTime": 1530.0292672499993,
+      "heapUsage": 4.477594648088727
     }
   },
   "minify": {
     "unbuild": {
-      "executionTime": 857.2373613333334,
-      "heapUsage": 124.56051254272461
+      "executionTime": 831.7190415833334,
+      "heapUsage": 130.73262363009982
     },
     "tsup": {
-      "executionTime": 79.40923958333333,
-      "heapUsage": 0.36413643576882104
+      "executionTime": 78.40436116666667,
+      "heapUsage": 0.29734115600585936
     },
     "tsdown (oxc)": {
-      "executionTime": 42.63945141666667,
-      "heapUsage": 6.8864015851702005
+      "executionTime": 42.54715723076923,
+      "heapUsage": 6.230432510375977
     },
     "tsdown (tsc)": {
-      "executionTime": 41.829464692307695,
-      "heapUsage": 6.793112618582589
+      "executionTime": 42.067229166666664,
+      "heapUsage": 6.745157514299665
     },
     "rslib": {
-      "executionTime": 1257.995389,
-      "heapUsage": 7.451304626464844
+      "executionTime": 1260.5400903333332,
+      "heapUsage": 4.835609436035156
     }
   },
   "sourcemap": {
     "unbuild": {
-      "executionTime": 843.9270000000006,
-      "heapUsage": 154.50531578063965
+      "executionTime": 868.5078958333334,
+      "heapUsage": 144.0311542087131
     },
     "tsup": {
-      "executionTime": 88.16947566666667,
-      "heapUsage": 3.2252384532581675
+      "executionTime": 89.02055566666667,
+      "heapUsage": 3.237884521484375
     },
     "tsdown (oxc)": {
-      "executionTime": 66.33205183333334,
-      "heapUsage": 5.608460744222005
+      "executionTime": 69.04430175,
+      "heapUsage": 5.452135721842448
     },
     "tsdown (tsc)": {
-      "executionTime": 77.93928475,
-      "heapUsage": 5.442097981770833
+      "executionTime": 71.91009033333333,
+      "heapUsage": 5.3615366617838545
     },
     "rslib": {
-      "executionTime": 1246.0768265,
-      "heapUsage": 7.541062927246093
+      "executionTime": 1260.682847166668,
+      "heapUsage": 4.256927490234375
     }
   },
   "dts": {
     "unbuild": {
-      "executionTime": 3051.199364416664,
-      "heapUsage": 517.3990674700055
+      "executionTime": 3028.708173666668,
+      "heapUsage": 542.3668365478516
     },
     "tsup": {
-      "executionTime": 3241.3160798333333,
-      "heapUsage": 1.0278438991970487
+      "executionTime": 3338.6293645833334,
+      "heapUsage": 0.6550818549262153
     },
     "tsdown (oxc)": {
-      "executionTime": 382.243309,
-      "heapUsage": 78.09270824085583
+      "executionTime": 413.62219791666666,
+      "heapUsage": 78.50990017977628
     },
     "tsdown (tsc)": {
-      "executionTime": 546.2542499166666,
-      "heapUsage": 99.34724495627664
+      "executionTime": 555.2896493333334,
+      "heapUsage": 99.69958634810014
     },
     "rslib": {
-      "executionTime": 1449.1348194166667,
-      "heapUsage": 2.3612199263139204
+      "executionTime": 1580.1800520833333,
+      "heapUsage": 2.1641089699485083
     }
   }
 }

@@ -78,6 +78,7 @@ interface Option {
 }
 const featureList: Option[] = [
 	{ value: "default", label: "Default" },
+	{ value: "cjs", label: "CommonJS" },
 	{ value: "minify", label: "Minification" },
 	{ value: "sourcemap", label: "Source Maps" },
 	{ value: "dts", label: "DTS" },

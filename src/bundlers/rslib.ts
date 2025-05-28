@@ -19,7 +19,7 @@ export const build = async (options: BundlerOptions) => {
 						? `${projectDir}/rslib.tsconfig.json`
 						: undefined,
 				},
-				format: "esm",
+				format: options.cjs ? "cjs" : "esm",
 				syntax: ["node 18"],
 				dts: options.dts || false,
 				output: {
