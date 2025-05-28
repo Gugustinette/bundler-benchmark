@@ -14,8 +14,8 @@ export const build = async (options: BundlerOptions) => {
 		format: "esm",
 		target: "esnext",
 		clean: true,
-		sourcemap: true,
-		minify: true,
+		sourcemap: options.sourcemap || false,
+		minify: options.minify || false,
 		silent: true,
 		dts: options.dts || false,
 	});

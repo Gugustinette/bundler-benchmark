@@ -64,7 +64,6 @@ export const COMMON_CHART_OPTIONS = {
 			},
 			title: {
 				display: true,
-				text: "X Axis Title",
 				color: "#888",
 			},
 		},

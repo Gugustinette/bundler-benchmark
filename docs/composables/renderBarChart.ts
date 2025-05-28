@@ -4,8 +4,8 @@ import {
 	CategoryScale,
 	Chart,
 	LinearScale,
-	plugins,
 } from "chart.js";
+import type { BenchmarkResults } from "./useBenchmarkData";
 import {
 	COMMON_CHART_OPTIONS,
 	createItemColorMapping,
@@ -16,28 +16,49 @@ Chart.register(CategoryScale, LinearScale, BarController, BarElement);
 
 interface BarChartOptions {
 	canvas: HTMLCanvasElement;
-	data: BarChartData;
-	yAxisTitle: string;
-	measurementUnit?: string;
+	data: BenchmarkResults;
+	feature: string;
+	measurement: "executionTime" | "heapUsage";
 }
 
 export const renderBarChart = ({
 	canvas,
 	data,
-	yAxisTitle,
-	measurementUnit,
-}: BarChartOptions): void => {
-	const items = data ? Object.keys(data) : [];
+	feature,
+	measurement,
+}: BarChartOptions): Chart => {
+	// Get the feature data
+	const featureData = data[feature];
+	if (!featureData) {
+		throw new Error(`Feature "${feature}" not found in benchmark data`);
+	}
 
-	// Create consistent color mapping for items
-	const itemColorMapping = createItemColorMapping(items);
+	// Get all bundlers for this feature
+	const bundlers = Object.keys(featureData);
 
-	// Create one dataset per item so each can be toggled individually
-	const datasets = items.map((item) => ({
-		label: item,
-		data: [data[item] || 0], // Single value array for this item
-		backgroundColor: itemColorMapping[item].background,
-		borderColor: itemColorMapping[item].border,
+	// Infer measurement details from the measurement type
+	const measurementConfig = {
+		executionTime: {
+			yAxisTitle: "Execution Time (ms)",
+			unit: "ms",
+		},
+		heapUsage: {
+			yAxisTitle: "Heap Usage (MB)",
+			unit: "MB",
+		},
+	};
+
+	const config = measurementConfig[measurement];
+
+	// Create consistent color mapping for bundlers
+	const bundlerColorMapping = createItemColorMapping(bundlers);
+
+	// Create one dataset per bundler so each can be toggled individually
+	const datasets = bundlers.map((bundler) => ({
+		label: bundler,
+		data: [featureData[bundler][measurement]], // Single value array for this bundler
+		backgroundColor: bundlerColorMapping[bundler].background,
+		borderColor: bundlerColorMapping[bundler].border,
 		borderWidth: 1,
 	}));
 
@@ -46,16 +67,18 @@ export const renderBarChart = ({
 		datasets: datasets,
 	};
 
-	new Chart(canvas, {
+	return new Chart(canvas, {
 		type: "bar",
 		data: chartData,
 		options: deepMerge({}, COMMON_CHART_OPTIONS, {
 			scales: {
 				y: {
 					title: {
-						text: yAxisTitle,
+						text: config.yAxisTitle,
 						display: true,
+						color: "#888",
 					},
+					beginAtZero: true,
 				},
 			},
 			plugins: {
@@ -63,9 +86,13 @@ export const renderBarChart = ({
 					callbacks: {
 						// biome-ignore lint/suspicious/noExplicitAny: No type information available
 						label: (context: any) => {
-							const itemLabel = context.dataset.label || "";
+							const bundlerLabel = context.dataset.label || "";
 							const yValue = context.parsed.y;
-							return `${itemLabel}: ${Number(yValue).toFixed(0)}${measurementUnit || ""}`;
+							return `${bundlerLabel}: ${Number(yValue).toFixed(0)}${config.unit}`;
+						},
+						// biome-ignore lint/suspicious/noExplicitAny: No type information available
+						title: (context: any) => {
+							return `Feature: ${feature}`;
 						},
 					},
 				},

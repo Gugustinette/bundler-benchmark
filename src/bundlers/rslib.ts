@@ -21,13 +21,14 @@ export const build = async (options: BundlerOptions) => {
 				},
 				format: "esm",
 				syntax: ["node 18"],
-				dts: options.dts,
+				dts: options.dts || false,
 				output: {
-					minify: true,
-					sourceMap: true,
+					minify: options.minify || false,
+					sourceMap: options.sourcemap || false,
 					distPath: {
 						root: outputDir,
 					},
+					cleanDistPath: true,
 				},
 			},
 		],

@@ -12,12 +12,12 @@ export const build = async (options: BundlerOptions) => {
 		entries: [entryFile],
 		outDir: outputDir,
 		clean: true,
-		sourcemap: true,
+		sourcemap: options.sourcemap || false,
 		declaration: options.dts ? "node16" : false,
 		rollup: {
 			emitCJS: false,
 			esbuild: {
-				minify: true,
+				minify: options.minify || false,
 				target: "esnext",
 				format: "esm",
 			},

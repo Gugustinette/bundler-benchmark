@@ -6,7 +6,7 @@ import {
 	PointElement,
 	Tooltip,
 } from "chart.js";
-import type { BenchmarkData } from "./useBenchmarkData";
+import type { BenchmarkResults } from "./useBenchmarkData";
 import {
 	COMMON_CHART_OPTIONS,
 	createItemColorMapping,
@@ -18,54 +18,48 @@ Chart.register(LinearScale, BubbleController, PointElement, Tooltip, Legend);
 
 interface BubbleChartOptions {
 	canvas: HTMLCanvasElement;
-	data: BenchmarkData;
+	data: BenchmarkResults;
+	feature: string;
 }
 
 export const renderBubbleChart = ({
 	canvas,
 	data,
-}: BubbleChartOptions): void => {
-	// Get all unique item names across all groups
-	const allItems = new Set<string>();
-	Object.values(data.executionTime).forEach((groupData) => {
-		Object.keys(groupData).forEach((item) => allItems.add(item));
-	});
+	feature,
+}: BubbleChartOptions): Chart => {
+	// Get the feature data
+	const featureData = data[feature];
+	if (!featureData) {
+		throw new Error(`Feature "${feature}" not found in benchmark data`);
+	}
 
-	// Create consistent color mapping for items
-	const itemColorMapping = createItemColorMapping(Array.from(allItems));
+	// Get all bundlers for this feature
+	const bundlers = Object.keys(featureData);
 
-	// Restructure data: each item becomes a dataset containing data for all groups
-	const datasets = Array.from(allItems).map((item) => {
-		const itemData = Object.keys(data.executionTime)
-			.map((group) => {
-				const executionTime = data.executionTime[group][item] || 0;
-				const heapUsage = data.heapUsage[group]?.[item]
-					? data.heapUsage[group][item]
-					: 0;
+	// Create consistent color mapping for bundlers
+	const bundlerColorMapping = createItemColorMapping(bundlers);
 
-				// Only include data point if the item exists in this group
-				if (data.executionTime[group][item] !== undefined) {
-					return {
-						x: executionTime,
-						y: heapUsage,
-						r: 8,
-						groupLabel: group, // Store the group label for tooltips
-					};
-				}
-				return null;
-			})
-			.filter(Boolean); // Remove null entries
+	// Create datasets: each bundler becomes a dataset with a single data point
+	const datasets = bundlers.map((bundler) => {
+		const result = featureData[bundler];
 
 		return {
-			label: item, // Now the dataset label is the item name
-			data: itemData,
-			backgroundColor: itemColorMapping[item].background,
-			borderColor: itemColorMapping[item].border,
+			label: bundler, // Dataset label is the bundler name
+			data: [
+				{
+					x: result.heapUsage,
+					y: result.executionTime,
+					r: 8,
+					bundlerLabel: bundler, // Store bundler name for tooltips
+				},
+			],
+			backgroundColor: bundlerColorMapping[bundler].background,
+			borderColor: bundlerColorMapping[bundler].border,
 			borderWidth: 1,
 		};
 	});
 
-	new Chart(canvas, {
+	return new Chart(canvas, {
 		type: "bubble",
 		data: {
 			datasets: datasets,
@@ -85,12 +79,14 @@ export const renderBubbleChart = ({
 					callbacks: {
 						// biome-ignore lint/suspicious/noExplicitAny: No type information available
 						label: (context: any) => {
-							const itemLabel = context.dataset.label || "";
-							const groupLabel =
-								(context.raw as { groupLabel?: string }).groupLabel || "N/A";
+							const bundlerLabel = context.dataset.label || "";
 							const xValue = context.parsed.x;
 							const yValue = context.parsed.y;
-							return `${itemLabel} (${groupLabel}): Time=${Number(xValue).toFixed(0)}ms, Heap=${Number(yValue).toFixed(0)}MB`;
+							return `${bundlerLabel}: Time=${Number(yValue).toFixed(0)}ms, Heap=${Number(xValue).toFixed(0)}MB`;
+						},
+						// biome-ignore lint/suspicious/noExplicitAny: No type information available
+						title: (context: any) => {
+							return `Feature: ${feature}`;
 						},
 					},
 				},
@@ -98,7 +94,7 @@ export const renderBubbleChart = ({
 			scales: {
 				x: {
 					title: {
-						text: "Execution Time (ms)",
+						text: "Heap Usage (MB)",
 						display: true,
 						color: "#888",
 					},
@@ -107,7 +103,7 @@ export const renderBubbleChart = ({
 				},
 				y: {
 					title: {
-						text: "Heap Usage (MB)",
+						text: "Execution Time (ms)",
 						display: true,
 						color: "#888",
 					},

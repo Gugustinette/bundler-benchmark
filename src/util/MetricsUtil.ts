@@ -1,6 +1,9 @@
-export interface BarChartMetrics {
-	[group: string]: {
-		[item: string]: number;
+export interface BenchmarkResults {
+	[feature: string]: {
+		[bundler: string]: {
+			executionTime: number; // in milliseconds
+			heapUsage: number; // in megabytes
+		};
 	};
 }
 
@@ -10,11 +13,11 @@ export interface BarChartMetrics {
 export class MetricsUtil {
 	/**
 	 * Save given metrics to a JSON file
-	 * @param metrics Object containing project metrics data
+	 * @param metrics Object containing benchmark results
 	 * @param filePath Path to save the JSON file
 	 */
 	public static saveMetricsToJson(
-		metrics: BarChartMetrics,
+		metrics: BenchmarkResults,
 		filePath: string,
 	): void {
 		try {
@@ -37,16 +40,17 @@ export class MetricsUtil {
 	 * Log the results of the benchmark
 	 * @param metrics Object containing project metrics data
 	 */
-	public static logMetrics(
-		name: string,
-		unit: string,
-		metrics: BarChartMetrics,
-	): void {
-		console.log(`\n${name}:`);
+	public static logMetrics(metrics: BenchmarkResults): void {
+		console.log("Benchmark Results:");
 		for (const project in metrics) {
-			console.log(`  Project: ${project}`);
+			console.log(`Project: ${project}`);
 			for (const bundler in metrics[project]) {
-				console.log(`    ${bundler}: ${metrics[project][bundler]} ${unit}`);
+				const { executionTime, heapUsage } = metrics[project][bundler];
+				console.log(
+					`  Bundler: ${bundler}, Execution Time: ${executionTime.toFixed(
+						2,
+					)} ms, Heap Usage: ${(heapUsage).toFixed(2)} MB`,
+				);
 			}
 		}
 		console.log("");
