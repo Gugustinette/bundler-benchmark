@@ -3,7 +3,8 @@ import { build as buildRslib } from "./bundlers/rslib";
 import { build as buildTsdown } from "./bundlers/tsdown";
 import { build as buildTsup } from "./bundlers/tsup";
 import { build as buildUnbuild } from "./bundlers/unbuild";
-import { type BarChartMetrics, MetricsUtil } from "./util/MetricsUtil";
+import { type BenchmarkResults, MetricsUtil } from "./util/MetricsUtil";
+import type { BundlerOptions } from "./bundlers/BundlerOptions";
 
 // Define bundlers declaratively
 const bundlers = [
@@ -32,13 +33,34 @@ const bundlers = [
 	},
 ];
 
-const projects = [
+interface FeatureOptions {
+	name: string;
+	project: string;
+	bundlerOptions?: BundlerOptions;
+}
+const features: FeatureOptions[] = [
 	{
-		name: "thousand-functions",
+		name: "default",
+		project: "thousand-functions",
 		bundlerOptions: {},
 	},
 	{
-		name: "thousand-typed-functions",
+		name: "minify",
+		project: "thousand-functions",
+		bundlerOptions: {
+			minify: true,
+		},
+	},
+	{
+		name: "sourcemap",
+		project: "thousand-functions",
+		bundlerOptions: {
+			sourcemap: true,
+		},
+	},
+	{
+		name: "dts",
+		project: "thousand-functions",
 		bundlerOptions: {
 			dts: true,
 		},
@@ -46,21 +68,19 @@ const projects = [
 ];
 
 const benchmark = async () => {
-	// Create the metrics objects
-	const executionTimeMetrics: BarChartMetrics = {};
-	const heapUsageMetrics: BarChartMetrics = {};
+	// Create the metrics object
+	const benchmarkResults: BenchmarkResults = {};
 
-	for (const project of projects) {
+	for (const feature of features) {
 		// Initialize the map for the project
-		executionTimeMetrics[project.name] = {};
-		heapUsageMetrics[project.name] = {};
+		benchmarkResults[feature.name] = {};
 
 		// Add the build functions to the benchmark suite using the bundlers array
 		for (const bundler of bundlers) {
-			bench(`${project.name}@${bundler.name}`, async () => {
+			bench(`${feature.name}@${bundler.name}`, async () => {
 				await bundler.build({
-					project: project.name,
-					...project.bundlerOptions,
+					project: feature.project,
+					...feature.bundlerOptions,
 					...bundler.bundlerOptions,
 				});
 			});
@@ -73,46 +93,28 @@ const benchmark = async () => {
 	// Convert the results to the custom metrics object
 	results.benchmarks.forEach((benchmark) => {
 		const name = benchmark.alias;
-		const projectName = name.split("@")[0];
+		const featureName = name.split("@")[0];
 		const bundlerName = name.split("@")[1];
 		if (benchmark.runs.length > 0) {
 			const run = benchmark.runs[0];
 			const averageExecutionTime = run.stats?.avg ?? 0; // Execution time in nanoseconds
 			const averageHeapUsage = run.stats?.heap?.avg ?? 0; // Heap usage in bytes
-			if (executionTimeMetrics[projectName]) {
-				executionTimeMetrics[projectName][bundlerName] =
-					averageExecutionTime / 1e6; // Convert to milliseconds
-			}
-			if (heapUsageMetrics[projectName]) {
-				heapUsageMetrics[projectName][bundlerName] =
-					averageHeapUsage / 1024 / 1024; // Convert to megabytes
-			}
+			benchmarkResults[featureName][bundlerName] = {
+				executionTime: averageExecutionTime / 1e6, // Convert to milliseconds
+				heapUsage: averageHeapUsage / 1024 / 1024, // Convert to megabytes
+			};
 		}
 	});
 
 	// Log the metrics to the console
-	MetricsUtil.logMetrics(
-		"Execution Time Benchmark",
-		"ms",
-		executionTimeMetrics,
-	);
-	MetricsUtil.logMetrics("Heap Usage Benchmark", "MB", heapUsageMetrics);
+	MetricsUtil.logMetrics(benchmarkResults);
 
 	// Save the SVG chart to a file
 	MetricsUtil.saveMetricsToJson(
-		executionTimeMetrics,
-		"docs/public/results/bundler-execution-time-comparison.json",
+		benchmarkResults,
+		"docs/public/results/benchmark-results.json",
 	);
-	console.log(
-		"JSON data saved to docs/public/results/bundler-execution-time-comparison.json",
-	);
-	MetricsUtil.saveMetricsToJson(
-		heapUsageMetrics,
-		"docs/public/results/bundler-heap-usage-comparison.json",
-	);
-	console.log(
-		"JSON data saved to docs/public/results/bundler-heap-usage-comparison.json",
-	);
+	console.log("JSON data saved to docs/public/results/benchmark-results.json");
 };
 
 benchmark().catch((err) => {

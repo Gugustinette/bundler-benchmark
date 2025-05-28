@@ -1,36 +1,22 @@
-export interface BarChartData {
-	[item: string]: number;
-}
-export interface BarChartMetrics {
-	[group: string]: BarChartData;
-}
-export interface BenchmarkData {
-	executionTime: BarChartMetrics;
-	heapUsage: BarChartMetrics;
-}
-
-export const useBenchmarkData = async (): Promise<BenchmarkData> => {
-	// Get Execution Time Benchmark Data
-	let response = await fetch(
-		"/bundler-benchmark/results/bundler-execution-time-comparison.json",
-	);
-	if (!response.ok) {
-		throw new Error("Failed to fetch benchmark data");
-	}
-	const executionTimeData = await response.json();
-
-	// Get Heap Usage Benchmark Data
-	response = await fetch(
-		"/bundler-benchmark/results/bundler-heap-usage-comparison.json",
-	);
-	if (!response.ok) {
-		throw new Error("Failed to fetch benchmark data");
-	}
-	const heapUsageData = await response.json();
-
-	// Return the benchmark data
-	return {
-		executionTime: executionTimeData,
-		heapUsage: heapUsageData,
+export interface BenchmarkResults {
+	[feature: string]: {
+		[bundler: string]: {
+			executionTime: number; // in milliseconds
+			heapUsage: number; // in megabytes
+		};
 	};
+}
+
+export const useBenchmarkResults = async (): Promise<BenchmarkResults> => {
+	// Get the benchmark results from the JSON file
+	const response = await fetch(
+		"/bundler-benchmark/results/benchmark-results.json",
+	);
+	if (!response.ok) {
+		throw new Error("Failed to fetch benchmark results");
+	}
+	const benchmarkResults = await response.json();
+
+	// Return the benchmark results
+	return benchmarkResults;
 };

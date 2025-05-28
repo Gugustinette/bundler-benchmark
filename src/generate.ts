@@ -34,16 +34,8 @@ const generateIndexFile = async (
 	await fs.promises.writeFile(outputPath, `${indexContent}\n`);
 };
 
-// Content generators
-const generateSimpleFunction = (index: number): string => {
-	const functionName = `myFunction${index}`;
-	return `export const ${functionName} = () => {
-  console.log('Hello from function ${index}!');
-};
-`;
-};
-
-const generateTypedFunction = (index: number): string => {
+// Content generator
+const generateFunction = (index: number): string => {
 	const functionName = `myFunction${index}`;
 	const interfaceName = `Options${index}`;
 
@@ -104,14 +96,7 @@ const generate = async () => {
 			name: "thousand-functions",
 			basePath,
 			count: 1000,
-			generateFileContent: generateSimpleFunction,
-			getFileName: (index) => `function${index}.ts`,
-		},
-		{
-			name: "thousand-typed-functions",
-			basePath,
-			count: 1000,
-			generateFileContent: generateTypedFunction,
+			generateFileContent: generateFunction,
 			getFileName: (index) => `function${index}.ts`,
 		},
 	];
