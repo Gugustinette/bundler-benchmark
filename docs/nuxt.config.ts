@@ -23,7 +23,7 @@ export default defineNuxtConfig({
 	},
 	nitro: {
 		prerender: {
-			routes: ["/_ipx/w_600/ts-function.png"],
+			routes: ["/_ipx/w_600/ts-function.png", "/_ipx/w_1200/ts-function.png"],
 		},
 	},
 });
