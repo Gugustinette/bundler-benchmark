@@ -3,7 +3,9 @@ import {
 	BarElement,
 	CategoryScale,
 	Chart,
+	Legend,
 	LinearScale,
+	Tooltip,
 } from "chart.js";
 import type { BenchmarkResults } from "./useBenchmarkData";
 import {
@@ -12,7 +14,14 @@ import {
 } from "./utils/ChartUtil";
 import { deepMerge } from "./utils/CommonUtil";
 
-Chart.register(CategoryScale, LinearScale, BarController, BarElement);
+Chart.register(
+	CategoryScale,
+	LinearScale,
+	BarController,
+	BarElement,
+	Tooltip,
+	Legend,
+);
 
 interface BarChartOptions {
 	canvas: HTMLCanvasElement;

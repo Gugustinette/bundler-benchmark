@@ -39,8 +39,7 @@
 
     <p>
       You can visualize the results by selecting a specific feature from the
-      dropdown below. The charts will update to show execution time and heap
-      usage.
+      dropdown below. The charts will update to show execution time for the selected feature across different bundlers.
     </p>
     <Select
       :options="featureList"
@@ -49,22 +48,10 @@
       aria-label="Feature selection"
     />
 
-    <!-- Execution time by heap usage bubble chart -->
-    <h2>Execution time by heap usage</h2>
-    <div class="chart-container">
-      <canvas ref="executionTimeByHeapUsageCanva"></canvas>
-    </div>
-
     <!-- Execution time -->
     <h2>Execution time (less is better)</h2>
     <div class="chart-container">
       <canvas ref="executionTimeCanva"></canvas>
-    </div>
-
-    <!-- Heap usage -->
-    <h2>Heap usage (less is better)</h2>
-    <div class="chart-container">
-      <canvas ref="heapUsageCanva"></canvas>
     </div>
   </main>
 </template>
@@ -94,43 +81,21 @@ const featureList: Option[] = [
 ];
 const selectedFeature = ref(featureList[0].value);
 
-// Executioe time by heap usage bubble chart
-const executionTimeByHeapUsageCanva = ref<HTMLCanvasElement | null>(null);
-let executionTimeByHeapUsageChart: Chart | null = null;
 // Execution time bar chart
 const executionTimeCanva = ref<HTMLCanvasElement | null>(null);
 let executionTimeChart: Chart | null = null;
-// Heap usage bar chart
-const heapUsageCanva = ref<HTMLCanvasElement | null>(null);
-let heapUsageChart: Chart | null = null;
 
 onMounted(async () => {
 	// Get benchmark results
 	benchmarkResults.value = await useBenchmarkResults();
 
 	// Render charts
-	if (executionTimeByHeapUsageCanva.value) {
-		executionTimeByHeapUsageChart = renderBubbleChart({
-			canvas: executionTimeByHeapUsageCanva.value,
-			data: benchmarkResults.value,
-			feature: "default",
-		});
-	}
-
 	if (executionTimeCanva.value) {
 		executionTimeChart = renderBarChart({
 			canvas: executionTimeCanva.value,
 			data: benchmarkResults.value,
 			feature: "default",
 			measurement: "executionTime",
-		});
-	}
-	if (heapUsageCanva.value) {
-		heapUsageChart = renderBarChart({
-			canvas: heapUsageCanva.value,
-			data: benchmarkResults.value,
-			feature: "default",
-			measurement: "heapUsage",
 		});
 	}
 });
@@ -141,27 +106,12 @@ watch(
 		if (!benchmarkResults.value) return;
 
 		// Update charts
-		if (executionTimeByHeapUsageChart) {
-			updateBubbleChart({
-				chart: executionTimeByHeapUsageChart,
-				data: benchmarkResults.value,
-				feature: newFeature,
-			});
-		}
 		if (executionTimeChart) {
 			updateBarChart({
 				chart: executionTimeChart,
 				data: benchmarkResults.value,
 				feature: newFeature,
 				measurement: "executionTime",
-			});
-		}
-		if (heapUsageChart) {
-			updateBarChart({
-				chart: heapUsageChart,
-				data: benchmarkResults.value,
-				feature: newFeature,
-				measurement: "heapUsage",
 			});
 		}
 	},
