@@ -5,20 +5,24 @@ import { build as buildTsdown } from "./bundlers/tsdown";
 import { build as buildTsup } from "./bundlers/tsup";
 import { build as buildUnbuild } from "./bundlers/unbuild";
 import { type BenchmarkResults, MetricsUtil } from "./util/MetricsUtil";
+import { build as buildBunup } from "./bundlers/bunup";
 
 // Define bundlers declaratively
 const bundlers = [
 	{
 		name: "unbuild",
 		build: buildUnbuild,
+		bundlerOptions: {},
 	},
 	{
 		name: "tsup",
 		build: buildTsup,
+		bundlerOptions: {},
 	},
 	{
 		name: "tsdown (oxc)",
 		build: buildTsdown,
+		bundlerOptions: {},
 	},
 	{
 		name: "tsdown (tsc)",
@@ -30,6 +34,12 @@ const bundlers = [
 	{
 		name: "rslib",
 		build: buildRslib,
+		bundlerOptions: {},
+	},
+	{
+		name: "bunup",
+		build: buildBunup,
+		bundlerOptions: {},
 	},
 ];
 

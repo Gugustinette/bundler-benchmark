@@ -24,10 +24,11 @@
         and tsc)
       </li>
       <li><a href="https://lib.rsbuild.dev/" target="_blank">rslib</a></li>
+      <li><a href="https://bunup.dev/" target="_blank">bunup</a></li>
     </ul>
     <p>
       Benchmark was run on a MacBook M1 Pro with 16GB of RAM, using Node.js
-      v22.2.0.
+      v22.2.0 and Bun v1.2.15 (for bunup).
       <br />
       Source code for the benchmark is available on
       <a
