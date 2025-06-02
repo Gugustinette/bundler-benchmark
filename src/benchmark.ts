@@ -20,16 +20,9 @@ const bundlers = [
 		bundlerOptions: {},
 	},
 	{
-		name: "tsdown (oxc)",
+		name: "tsdown",
 		build: buildTsdown,
 		bundlerOptions: {},
-	},
-	{
-		name: "tsdown (tsc)",
-		build: buildTsdown,
-		bundlerOptions: {
-			isolatedDeclarations: false,
-		},
 	},
 	{
 		name: "rslib",
@@ -47,6 +40,8 @@ interface FeatureOptions {
 	name: string;
 	project: string;
 	bundlerOptions?: BundlerOptions;
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+	alterBundlerArray?: (bundlers: any[]) => any[];
 }
 const features: FeatureOptions[] = [
 	{
@@ -81,6 +76,27 @@ const features: FeatureOptions[] = [
 		bundlerOptions: {
 			dts: true,
 		},
+		alterBundlerArray: (bundlers) => {
+			// Modify the name of the existing tsdown entry
+			const alteredBundlers = bundlers.map((bundler) => {
+				if (bundler.name === "tsdown") {
+					return {
+						...bundler,
+						name: "tsdown (oxc)",
+					};
+				}
+				return bundler;
+			});
+			// Duplicate the tsdown to test tsc usage
+			alteredBundlers.push({
+				name: "tsdown (tsc)",
+				build: buildTsdown,
+				bundlerOptions: {
+					isolatedDeclarations: false,
+				},
+			});
+			return alteredBundlers;
+		},
 	},
 ];
 
@@ -92,8 +108,15 @@ const benchmark = async () => {
 		// Initialize the map for the project
 		benchmarkResults[feature.name] = {};
 
+		// Use the original bundler if no alteration is needed
+		let bundlersToUse = bundlers;
+		// Check if alterBundlerArray is defined and apply it
+		if (feature.alterBundlerArray) {
+			bundlersToUse = feature.alterBundlerArray(bundlers);
+		}
+
 		// Add the build functions to the benchmark suite using the bundlers array
-		for (const bundler of bundlers) {
+		for (const bundler of bundlersToUse) {
 			bench(`${feature.name}@${bundler.name}`, async () => {
 				await bundler.build({
 					project: feature.project,
