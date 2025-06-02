@@ -8,7 +8,7 @@ import { type BenchmarkResults, MetricsUtil } from "./util/MetricsUtil";
 import { build as buildBunup } from "./bundlers/bunup";
 
 // Define bundlers declaratively
-const bundlers = [
+let bundlers = [
 	{
 		name: "unbuild",
 		build: buildUnbuild,
@@ -77,6 +77,11 @@ const features: FeatureOptions[] = [
 			dts: true,
 		},
 		alterBundlerArray: (bundlers) => {
+			// Verify tsdown is included
+			if (!bundlers.some((b) => b.name === "tsdown")) {
+				// Return the original array if tsdown is not found
+				return bundlers;
+			}
 			// Modify the name of the existing tsdown entry
 			const alteredBundlers = bundlers.map((bundler) => {
 				if (bundler.name === "tsdown") {
@@ -157,6 +162,21 @@ const benchmark = async () => {
 	console.log("JSON data saved to docs/public/results/benchmark-results.json");
 };
 
-benchmark().catch((err) => {
-	console.error("Error during benchmark:", err);
-});
+const main = async () => {
+	// Parse CLI arguments for handling multiple runtimes
+	const args = process.argv.slice(2);
+	if (args.length > 0) {
+		const runtime = args[1].toLowerCase();
+		if (runtime === "bun") {
+			// Only keep bunup entry in the bundlers array
+			bundlers = bundlers.filter((b) => b.name === "bunup");
+		}
+	} else {
+		// Remove the bunup entry in any other runtime
+		bundlers = bundlers.filter((b) => b.name !== "bunup");
+	}
+
+	await benchmark();
+};
+
+main();

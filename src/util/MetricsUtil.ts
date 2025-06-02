@@ -1,3 +1,5 @@
+import { CommonUtil } from "./CommonUtil";
+
 export interface BenchmarkResults {
 	[feature: string]: {
 		[bundler: string]: {
@@ -24,7 +26,15 @@ export class MetricsUtil {
 			// Check if we're in a Node.js environment
 			if (typeof require !== "undefined") {
 				const fs = require("node:fs");
-				fs.writeFileSync(filePath, JSON.stringify(metrics, null, 2), "utf8");
+				let existingData: BenchmarkResults = {};
+				if (fs.existsSync(filePath)) {
+					const fileContent = fs.readFileSync(filePath, "utf8");
+					existingData = JSON.parse(fileContent);
+				}
+
+				const mergedData = CommonUtil.deepMerge(existingData, metrics);
+
+				fs.writeFileSync(filePath, JSON.stringify(mergedData, null, 2), "utf8");
 			} else {
 				throw new Error(
 					"This method can only be used in a Node.js environment",
