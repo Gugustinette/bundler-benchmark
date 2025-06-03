@@ -7,38 +7,56 @@ import { build as buildUnbuild } from "./bundlers/unbuild";
 import { type BenchmarkResults, MetricsUtil } from "./util/MetricsUtil";
 import { build as buildBunup } from "./bundlers/bunup";
 
-// Define bundlers declaratively
-let bundlers = [
+// Define projects declaratively
+interface ProjectOptions {
+	name: string;
+	bundlerOptions?: BundlerOptions;
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+	alterBundlerArray?: (bundlers: any[]) => any[];
+}
+const projects: ProjectOptions[] = [
+	/*
 	{
-		name: "unbuild",
-		build: buildUnbuild,
-		bundlerOptions: {},
+		name: "thousand-functions",
 	},
+	*/
 	{
-		name: "tsup",
-		build: buildTsup,
-		bundlerOptions: {},
-	},
-	{
-		name: "tsdown",
-		build: buildTsdown,
-		bundlerOptions: {},
-	},
-	{
-		name: "rslib",
-		build: buildRslib,
-		bundlerOptions: {},
-	},
-	{
-		name: "bunup",
-		build: buildBunup,
-		bundlerOptions: {},
+		name: "rxjs",
+		bundlerOptions: {
+			entries: [
+				"packages/observable/src/index.ts",
+				"packages/rxjs/src/index.ts",
+			],
+			external: ["@rxjs/observable"],
+		},
+		alterBundlerArray: (bundlers) => {
+			// Verify tsdown is included
+			if (!bundlers.some((b) => b.name === "tsdown")) {
+				// Return the original array if tsdown is not found
+				return bundlers;
+			}
+			// Disabling the tsdown oxc usage as rxjs code base isn't compatible with isolated declarations
+			const alteredBundlers = bundlers.map((bundler) => {
+				if (bundler.name === "tsdown") {
+					return {
+						...bundler,
+						name: "tsdown (tsc)",
+						bundlerOptions: {
+							...bundler.bundlerOptions,
+							isolatedDeclarations: false,
+						},
+					};
+				}
+				return bundler;
+			});
+			return alteredBundlers;
+		},
 	},
 ];
 
+// Define features declaratively
 interface FeatureOptions {
 	name: string;
-	project: string;
 	bundlerOptions?: BundlerOptions;
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	alterBundlerArray?: (bundlers: any[]) => any[];
@@ -46,33 +64,28 @@ interface FeatureOptions {
 const features: FeatureOptions[] = [
 	{
 		name: "default",
-		project: "thousand-functions",
 		bundlerOptions: {},
 	},
 	{
 		name: "cjs",
-		project: "thousand-functions",
 		bundlerOptions: {
 			cjs: true,
 		},
 	},
 	{
 		name: "minify",
-		project: "thousand-functions",
 		bundlerOptions: {
 			minify: true,
 		},
 	},
 	{
 		name: "sourcemap",
-		project: "thousand-functions",
 		bundlerOptions: {
 			sourcemap: true,
 		},
 	},
 	{
 		name: "dts",
-		project: "thousand-functions",
 		bundlerOptions: {
 			dts: true,
 		},
@@ -105,30 +118,68 @@ const features: FeatureOptions[] = [
 	},
 ];
 
+// Define bundlers declaratively
+let bundlers = [
+	{
+		name: "unbuild",
+		build: buildUnbuild,
+		bundlerOptions: {},
+	},
+	{
+		name: "tsup",
+		build: buildTsup,
+		bundlerOptions: {},
+	},
+	{
+		name: "tsdown",
+		build: buildTsdown,
+		bundlerOptions: {},
+	},
+	{
+		name: "rslib",
+		build: buildRslib,
+		bundlerOptions: {},
+	},
+	{
+		name: "bunup",
+		build: buildBunup,
+		bundlerOptions: {},
+	},
+];
+
 const benchmark = async () => {
 	// Create the metrics object
 	const benchmarkResults: BenchmarkResults = {};
 
-	for (const feature of features) {
+	for (const project of projects) {
 		// Initialize the map for the project
-		benchmarkResults[feature.name] = {};
+		benchmarkResults[project.name] = {};
+		for (const feature of features) {
+			// Initialize the map for the feature
+			benchmarkResults[project.name][feature.name] = {};
 
-		// Use the original bundler if no alteration is needed
-		let bundlersToUse = bundlers;
-		// Check if alterBundlerArray is defined and apply it
-		if (feature.alterBundlerArray) {
-			bundlersToUse = feature.alterBundlerArray(bundlers);
-		}
+			// Use the original bundler if no alteration is needed
+			let bundlersToUse = bundlers;
+			// Check if project.alterBundlerArray is defined and apply it
+			if (project.alterBundlerArray) {
+				bundlersToUse = project.alterBundlerArray(bundlersToUse);
+			}
+			// Check if feature.alterBundlerArray is defined and apply it
+			if (feature.alterBundlerArray) {
+				bundlersToUse = feature.alterBundlerArray(bundlersToUse);
+			}
 
-		// Add the build functions to the benchmark suite using the bundlers array
-		for (const bundler of bundlersToUse) {
-			bench(`${feature.name}@${bundler.name}`, async () => {
-				await bundler.build({
-					project: feature.project,
-					...feature.bundlerOptions,
-					...bundler.bundlerOptions,
+			// Add the build functions to the benchmark suite using the bundlers array
+			for (const bundler of bundlersToUse) {
+				bench(`${project.name}:${feature.name}@${bundler.name}`, async () => {
+					await bundler.build({
+						project: project.name,
+						...project.bundlerOptions,
+						...feature.bundlerOptions,
+						...bundler.bundlerOptions,
+					});
 				});
-			});
+			}
 		}
 	}
 
@@ -138,13 +189,14 @@ const benchmark = async () => {
 	// Convert the results to the custom metrics object
 	results.benchmarks.forEach((benchmark) => {
 		const name = benchmark.alias;
-		const featureName = name.split("@")[0];
+		const projectName = name.split(":")[0];
+		const featureName = name.split(":")[1].split("@")[0];
 		const bundlerName = name.split("@")[1];
 		if (benchmark.runs.length > 0) {
 			const run = benchmark.runs[0];
 			const averageExecutionTime = run.stats?.avg ?? 0; // Execution time in nanoseconds
 			const averageHeapUsage = run.stats?.heap?.avg ?? 0; // Heap usage in bytes
-			benchmarkResults[featureName][bundlerName] = {
+			benchmarkResults[projectName][featureName][bundlerName] = {
 				executionTime: averageExecutionTime / 1e6, // Convert to milliseconds
 				heapUsage: averageHeapUsage / 1024 / 1024, // Convert to megabytes
 			};

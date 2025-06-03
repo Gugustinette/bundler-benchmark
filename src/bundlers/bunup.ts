@@ -5,11 +5,15 @@ export const build = async (options: BundlerOptions) => {
 	// Setup the project path
 	const projectDir = `projects/${options.project}`;
 	const entryFile = `${projectDir}/src/index.ts`;
+	const entries = options.entries
+		? options.entries.map((entry) => `${projectDir}/${entry}`)
+		: undefined;
 	const outputDir = `${projectDir}/dist/bunup`;
 
 	// Build the project
 	await buildBunup({
-		entry: entryFile,
+		entry: entries ?? entryFile,
+		external: options.external ?? undefined,
 		outDir: outputDir,
 		format: [options.cjs ? "cjs" : "esm"],
 		clean: true,

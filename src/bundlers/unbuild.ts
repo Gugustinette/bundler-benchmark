@@ -9,7 +9,8 @@ export const build = async (options: BundlerOptions) => {
 
 	// Build the project
 	await buildUnbuild(projectDir, false, {
-		entries: [entryFile],
+		entries: options.entries ?? [entryFile],
+		externals: options.external ?? undefined,
 		outDir: outputDir,
 		clean: true,
 		sourcemap: options.sourcemap || false,

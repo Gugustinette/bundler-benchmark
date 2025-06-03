@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { downloadTemplate } from "giget";
 
 // Project types and configuration
 interface ProjectConfig {
@@ -104,6 +105,29 @@ const generate = async () => {
 	for (const project of projects) {
 		await generateProject(project);
 	}
+
+	// Clone test repositories
+	await downloadTemplate(
+		"https://api.github.com/repos/nestjs/nest/tarball/master",
+		{
+			dir: path.join(basePath, "nest"),
+			forceClean: true,
+		},
+	);
+	await downloadTemplate(
+		"https://api.github.com/repos/typeorm/typeorm/tarball/master",
+		{
+			dir: path.join(basePath, "typeorm"),
+			forceClean: true,
+		},
+	);
+	await downloadTemplate(
+		"https://api.github.com/repos/ReactiveX/rxjs/tarball/master",
+		{
+			dir: path.join(basePath, "rxjs"),
+			forceClean: true,
+		},
+	);
 };
 
 generate().catch((err) => {

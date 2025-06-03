@@ -1,10 +1,12 @@
 import { CommonUtil } from "./CommonUtil";
 
 export interface BenchmarkResults {
-	[feature: string]: {
-		[bundler: string]: {
-			executionTime: number; // in milliseconds
-			heapUsage: number; // in megabytes
+	[project: string]: {
+		[feature: string]: {
+			[bundler: string]: {
+				executionTime: number; // in milliseconds
+				heapUsage: number; // in megabytes
+			};
 		};
 	};
 }
@@ -54,13 +56,17 @@ export class MetricsUtil {
 		console.log("Benchmark Results:");
 		for (const project in metrics) {
 			console.log(`Project: ${project}`);
-			for (const bundler in metrics[project]) {
-				const { executionTime, heapUsage } = metrics[project][bundler];
-				console.log(
-					`  Bundler: ${bundler}, Execution Time: ${executionTime.toFixed(
-						2,
-					)} ms, Heap Usage: ${(heapUsage).toFixed(2)} MB`,
-				);
+			for (const feature in metrics[project]) {
+				console.log(`	Feature: ${feature}`);
+				for (const bundler in metrics[project][feature]) {
+					const { executionTime, heapUsage } =
+						metrics[project][feature][bundler];
+					console.log(
+						`		Bundler: ${bundler}, Execution Time: ${executionTime.toFixed(
+							2,
+						)} ms, Heap Usage: ${(heapUsage).toFixed(2)} MB`,
+					);
+				}
 			}
 		}
 		console.log("");
